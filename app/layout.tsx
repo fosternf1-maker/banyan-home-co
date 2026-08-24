@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Newsreader, Source_Sans_3 } from "next/font/google";
+import { PageMotion } from "@/components/page-motion";
 import { SiteNav } from "@/components/site-nav";
 import { site } from "@/lib/site";
 import "./globals.css";
@@ -34,6 +35,8 @@ export const metadata: Metadata = {
     "Hyde Park",
     "Palma Ceia",
     "South Tampa",
+    "Davis Islands",
+    "Bayshore",
   ],
   openGraph: {
     title: site.name,
@@ -71,6 +74,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <a className="skip-link" href="#content">
           Skip to content
         </a>
+        <PageMotion />
         <SiteNav />
         {children}
       </body>

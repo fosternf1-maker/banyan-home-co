@@ -12,7 +12,7 @@ export function SiteFooter() {
             <p>
               Private home management for Tampa homeowners.
               <br />
-              South Tampa · FishHawk Ranch
+              South Tampa
             </p>
           </div>
           <div>

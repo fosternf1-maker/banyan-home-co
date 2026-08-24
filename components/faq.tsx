@@ -13,9 +13,13 @@ export function Faq() {
           {faqs.map((item) => (
             <details key={item.q}>
               <summary>{item.q}</summary>
-              {item.a.map((paragraph) => (
-                <p key={paragraph}>{paragraph}</p>
-              ))}
+              <div className="faq__panel">
+                <div className="faq__panel-inner">
+                  {item.a.map((paragraph) => (
+                    <p key={paragraph}>{paragraph}</p>
+                  ))}
+                </div>
+              </div>
             </details>
           ))}
         </div>

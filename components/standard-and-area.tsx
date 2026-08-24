@@ -33,10 +33,11 @@ export function StandardAndArea() {
             ))}
           </ul>
           <p className="fine-print">
-            Founding members are also being taken in FishHawk Ranch. Outside
-            these areas,{" "}
-            <a href={site.waitlistMailto}>join the waitlist</a> — we expand by
-            neighbourhood, not by advertisement.
+            Outside these neighbourhoods,{" "}
+            <a className="link-liquid" href={site.waitlistMailto}>
+              join the waitlist
+            </a>{" "}
+            — we expand by neighbourhood, not by advertisement.
           </p>
         </div>
       </div>
