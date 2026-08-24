@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ButtonLink } from "@/components/button-link";
 import { Wordmark } from "@/components/wordmark";
 import { navLinks, site } from "@/lib/site";
@@ -8,6 +8,7 @@ import { navLinks, site } from "@/lib/site";
 export function SiteNav() {
   const [overHero, setOverHero] = useState(true);
   const [open, setOpen] = useState(false);
+  const detailsRef = useRef<HTMLDetailsElement>(null);
 
   useEffect(() => {
     const hero = document.getElementById("hero");
@@ -33,7 +34,9 @@ export function SiteNav() {
     if (!open) return;
 
     function onKey(event: KeyboardEvent) {
-      if (event.key === "Escape") setOpen(false);
+      if (event.key === "Escape") {
+        detailsRef.current?.removeAttribute("open");
+      }
     }
 
     window.addEventListener("keydown", onKey);
@@ -41,6 +44,10 @@ export function SiteNav() {
   }, [open]);
 
   const tone = overHero && !open ? "dark" : "light";
+
+  function closeMenu() {
+    detailsRef.current?.removeAttribute("open");
+  }
 
   return (
     <header className={`site-nav site-nav--${tone}${open ? " is-open" : ""}`}>
@@ -61,39 +68,34 @@ export function SiteNav() {
           >
             Book the audit
           </ButtonLink>
-          <button
-            type="button"
-            className="site-nav__menu"
-            aria-expanded={open}
-            aria-controls="mobile-nav"
-            onClick={() => setOpen((value) => !value)}
+          <details
+            ref={detailsRef}
+            className="site-nav__mobile"
+            onToggle={(event) => {
+              setOpen(event.currentTarget.open);
+            }}
           >
-            {open ? "Close" : "Menu"}
-          </button>
+            <summary className="site-nav__menu">
+              <span className="site-nav__menu-open">Menu</span>
+              <span className="site-nav__menu-close">Close</span>
+            </summary>
+            <div id="mobile-nav" className="site-nav__drawer">
+              <nav aria-label="Mobile">
+                {navLinks.map((link) => (
+                  <a key={link.href} href={link.href} onClick={closeMenu}>
+                    {link.label}
+                  </a>
+                ))}
+                <a href={site.phoneHref} onClick={closeMenu}>
+                  {site.phoneDisplay}
+                </a>
+                <ButtonLink href={site.auditMailto} variant="ink">
+                  Book your home health audit
+                </ButtonLink>
+              </nav>
+            </div>
+          </details>
         </div>
-      </div>
-      <div
-        id="mobile-nav"
-        className="site-nav__drawer"
-        style={{ display: open ? "block" : "none" }}
-      >
-        <nav className="wrap" aria-label="Mobile">
-          {navLinks.map((link) => (
-            <a
-              key={link.href}
-              href={link.href}
-              onClick={() => setOpen(false)}
-            >
-              {link.label}
-            </a>
-          ))}
-          <a href={site.phoneHref} onClick={() => setOpen(false)}>
-            {site.phoneDisplay}
-          </a>
-          <ButtonLink href={site.auditMailto} variant="ink">
-            Book your home health audit
-          </ButtonLink>
-        </nav>
       </div>
     </header>
   );
