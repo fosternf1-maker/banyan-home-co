@@ -243,6 +243,7 @@ a {
   gap: 0.7rem;
   color: inherit;
   text-decoration: none;
+  flex-wrap: nowrap;
 }
 
 .wordmark__tree {
@@ -257,7 +258,7 @@ a {
 }
 
 .wordmark--lg .wordmark__tree {
-  width: clamp(4.6rem, 14vw, 6.4rem);
+  width: clamp(3.75rem, 12vw, 6.4rem);
   height: auto;
 }
 
@@ -303,6 +304,7 @@ a {
   right: 0;
   z-index: 50;
   height: var(--nav);
+  overflow: visible;
   transition:
     background-color 0.28s ease,
     border-color 0.28s ease,
@@ -385,12 +387,20 @@ a {
 }
 
 .site-nav__drawer {
+  display: none;
   position: absolute;
-  inset: var(--nav) 0 auto 0;
+  top: var(--nav);
+  left: 0;
+  right: 0;
+  z-index: 51;
   background: var(--color-paper);
   color: var(--color-ink);
   border-bottom: 1px solid var(--color-line);
   padding-block: 1.5rem 2.25rem;
+}
+
+.site-nav.is-open .site-nav__drawer {
+  display: block;
 }
 
 .site-nav__drawer nav {
@@ -413,8 +423,12 @@ a {
     display: flex;
   }
 
-  .site-nav__menu,
-  .site-nav__drawer {
+  .site-nav__menu {
+    display: none !important;
+  }
+
+  .site-nav__drawer,
+  .site-nav.is-open .site-nav__drawer {
     display: none !important;
   }
 }
@@ -484,8 +498,9 @@ a {
 .hero h1 {
   font-size: var(--step-4);
   line-height: 1.02;
-  max-width: 16ch;
+  max-width: 19ch;
   margin-bottom: 1.7rem;
+  text-align: left;
 }
 
 .hero h1 em {
@@ -499,6 +514,7 @@ a {
   line-height: 1.55;
   max-width: 52ch;
   margin-bottom: 2.6rem;
+  text-align: left;
 }
 
 .hero__actions {

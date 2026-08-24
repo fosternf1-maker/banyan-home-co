@@ -18,6 +18,17 @@ function Cell({ value }: { value: string }) {
     );
   }
 
+  if (value.includes(" · ")) {
+    const [main, note] = value.split(" · ");
+    return (
+      <>
+        {main}
+        <br />
+        <em>{note}</em>
+      </>
+    );
+  }
+
   return value;
 }
 

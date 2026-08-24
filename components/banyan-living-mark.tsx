@@ -15,7 +15,7 @@ export function BanyanLivingMark({
     <svg
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 168 120"
-      fill="none"
+      fill="currentColor"
       className={className}
       role={title ? "img" : undefined}
       aria-hidden={title ? undefined : true}

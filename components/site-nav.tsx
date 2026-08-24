@@ -75,7 +75,7 @@ export function SiteNav() {
       <div
         id="mobile-nav"
         className="site-nav__drawer"
-        hidden={!open}
+        style={{ display: open ? "block" : "none" }}
       >
         <nav className="wrap" aria-label="Mobile">
           {navLinks.map((link) => (
