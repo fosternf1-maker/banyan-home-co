@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Newsreader, Source_Sans_3 } from "next/font/google";
+import { JsonLd } from "@/components/json-ld";
 import { PageMotion } from "@/components/page-motion";
 import { SiteNav } from "@/components/site-nav";
 import { site } from "@/lib/site";
@@ -22,24 +23,15 @@ const body = Source_Sans_3({
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
-    default: site.name,
+    default: site.documentTitle,
     template: `%s · ${site.name}`,
   },
   description: site.description,
   applicationName: site.name,
   authors: [{ name: site.name }],
-  keywords: [
-    "Banyan Home Co",
-    "Tampa home management",
-    "home maintenance membership",
-    "Hyde Park",
-    "Palma Ceia",
-    "South Tampa",
-    "Davis Islands",
-    "Bayshore",
-  ],
+  keywords: [...site.keywords],
   openGraph: {
-    title: site.name,
+    title: site.documentTitle,
     description: site.description,
     url: "/",
     siteName: site.name,
@@ -48,7 +40,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: site.name,
+    title: site.documentTitle,
     description: site.description,
   },
   robots: {
@@ -71,6 +63,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={`${display.variable} ${body.variable} h-full antialiased`}
     >
       <body id="top" className="min-h-full">
+        <JsonLd />
         <a className="skip-link" href="#content">
           Skip to content
         </a>

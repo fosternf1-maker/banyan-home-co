@@ -1,17 +1,37 @@
+const EMAIL = "hello@banyanhomeco.com";
+const TELEPHONE = "+18133300480";
+
+export const neighborhoods = [
+  "Hyde Park",
+  "Palma Ceia",
+  "Beach Park",
+  "Davis Islands",
+  "Harbour Island",
+  "Bayshore",
+  "Sunset Park",
+  "Culbreath Isles",
+] as const;
+
 export const site = {
   name: "Banyan Home Co.",
   shortName: "Banyan",
+  documentTitle: "Banyan Home Co. · South Tampa home management",
   description:
     "Banyan Home Co. is a private home management membership for Tampa homeowners. One number, a vetted network of licensed trades, and someone from our team at your home when they arrive.",
   url: "https://banyan-home-co.vercel.app",
-  email: "hello@banyanhomeco.com",
+  email: EMAIL,
+  telephone: TELEPHONE,
   phoneDisplay: "(813) 330-0480",
-  phoneHref: "tel:+18133300480",
-  auditMailto:
-    "mailto:hello@banyanhomeco.com?subject=Home%20Health%20Audit",
-  vendorMailto:
-    "mailto:hello@banyanhomeco.com?subject=Vendor%20network",
-  waitlistMailto: "mailto:hello@banyanhomeco.com?subject=Waitlist",
+  phoneHref: `tel:${TELEPHONE}`,
+  auditMailto: `mailto:${EMAIL}?subject=Home%20Health%20Audit`,
+  vendorMailto: `mailto:${EMAIL}?subject=Vendor%20network`,
+  waitlistMailto: `mailto:${EMAIL}?subject=Waitlist`,
+  keywords: [
+    "South Tampa",
+    "home maintenance membership",
+    "home management",
+    ...neighborhoods,
+  ],
 } as const;
 
 export const navLinks = [
@@ -182,17 +202,6 @@ export const vettingItems = [
   "A signed response-time commitment — and removal from the network if it slips",
 ] as const;
 
-export const neighborhoods = [
-  "Hyde Park",
-  "Palma Ceia",
-  "Beach Park",
-  "Davis Islands",
-  "Harbour Island",
-  "Bayshore",
-  "Sunset Park",
-  "Culbreath Isles",
-] as const;
-
 export const faqs = [
   {
     q: "Is this a home warranty?",
@@ -234,6 +243,24 @@ export const faqs = [
     a: [
       "Any time, with 30 days' notice. Monthly memberships are month to month — there's no term, no early-termination fee, and no clause you'll find later.",
       "Annual members who cancel mid-term are refunded the unused months less the two-month prepay discount.",
+    ],
+  },
+  {
+    q: "Where in Tampa do you work?",
+    a: [
+      "Year 1 is South Tampa only: Hyde Park, Palma Ceia, Beach Park, Davis Islands, Harbour Island, Bayshore, Sunset Park, and Culbreath Isles. We stay inside that radius on purpose. We are not taking members outside it yet.",
+    ],
+  },
+  {
+    q: "Do you repair the house yourselves?",
+    a: [
+      "No. Banyan is a membership, not a repair company and not a warranty. Licensed trades do the work and invoice you directly. We coordinate, vet, and attend if you want us there.",
+    ],
+  },
+  {
+    q: "How does hurricane season work?",
+    a: [
+      "We are not an insurer and we do not handle claims. Signature and Platinum include hurricane readiness, scheduled before the season. After a storm we can document the house. Claims stay with your carrier.",
     ],
   },
 ] as const;
