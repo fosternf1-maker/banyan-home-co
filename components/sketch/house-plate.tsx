@@ -106,30 +106,7 @@ export function HousePlate({ activeId, explode, onSelect }: Props) {
         onClick={() => onSelect?.("roof")}
         style={{ cursor: onSelect ? "pointer" : undefined }}
       >
-        <ellipse cx="198" cy="268" rx="92" ry="54" fill={CANOPY} opacity="0.92" />
-        <ellipse cx="248" cy="250" rx="70" ry="44" fill={SAGE} opacity="0.55" />
-        <ellipse cx="156" cy="252" rx="62" ry="40" fill="#243F36" />
-        <path
-          d="M196 318 C192 292 186 270 198 248"
-          fill="none"
-          stroke="#1A3029"
-          strokeWidth="7"
-          strokeLinecap="round"
-        />
-        <path
-          d="M168 300 C166 278 170 262 176 250 M214 304 C220 280 226 264 232 252 M232 312 C238 286 248 268 256 258"
-          fill="none"
-          stroke={SAGE}
-          strokeWidth="1.2"
-          opacity="0.85"
-        />
-        <path
-          d="M140 258 C138 276 136 292 134 308 M118 262 C116 280 113 296 112 312 M102 268 C100 286 96 302 94 318"
-          fill="none"
-          stroke={SAGE}
-          strokeWidth="1.05"
-          opacity="0.7"
-        />
+        <LiveOak />
       </g>
 
       <polygon
@@ -261,11 +238,11 @@ export function HousePlate({ activeId, explode, onSelect }: Props) {
         onClick={() => onSelect?.("shutters")}
         style={{ cursor: onSelect ? "pointer" : undefined }}
       >
-        <g transform={`translate(${-22 * explode} 0)`}>
+        <g transform={`translate(${-36 * explode} 0)`}>
           <Shutter x={17} y={38} z={0} h={42} />
           <Shutter x={117} y={38} z={0} h={42} />
         </g>
-        <g transform={`translate(${22 * explode} 0)`}>
+        <g transform={`translate(${36 * explode} 0)`}>
           <Shutter x={62} y={38} z={0} h={42} />
           <Shutter x={162} y={38} z={0} h={42} />
         </g>
@@ -737,6 +714,58 @@ function Head({
         opacity={active ? 0.35 : 0}
       />
       <circle cx={cx} cy={cy} r="3.2" fill={BRASS} stroke={INK} strokeWidth="0.8" />
+    </g>
+  );
+}
+
+function LiveOak() {
+  const [baseX, baseY] = iso(-48, 0, 88);
+  const [crownX, crownY] = iso(-52, 78, 92);
+  return (
+    <g>
+      <ellipse
+        cx={crownX - 38}
+        cy={crownY - 18}
+        rx="58"
+        ry="34"
+        fill="#243F36"
+      />
+      <ellipse
+        cx={crownX + 8}
+        cy={crownY - 28}
+        rx="64"
+        ry="38"
+        fill={CANOPY}
+      />
+      <ellipse
+        cx={crownX + 42}
+        cy={crownY - 8}
+        rx="48"
+        ry="30"
+        fill={SAGE}
+        opacity="0.72"
+      />
+      <path
+        d={`M${baseX},${baseY} C${baseX - 6},${baseY - 28} ${baseX + 4},${baseY - 52} ${crownX},${crownY - 8}`}
+        fill="none"
+        stroke="#1A3029"
+        strokeWidth="7"
+        strokeLinecap="round"
+      />
+      <path
+        d={`M${crownX - 10},${crownY - 6} C${crownX - 28},${crownY - 22} ${crownX - 40},${crownY - 18} ${crownX - 52},${crownY - 10}`}
+        fill="none"
+        stroke="#1A3029"
+        strokeWidth="3.2"
+        strokeLinecap="round"
+      />
+      <path
+        d={`M${crownX - 36},${crownY + 4} C${crownX - 34},${crownY + 22} ${crownX - 38},${crownY + 36} ${crownX - 42},${crownY + 48} M${crownX + 22},${crownY + 2} C${crownX + 26},${crownY + 18} ${crownX + 20},${crownY + 32} ${crownX + 18},${crownY + 46} M${crownX - 8},${crownY + 6} C${crownX - 10},${crownY + 24} ${crownX - 6},${crownY + 38} ${crownX - 12},${crownY + 52}`}
+        fill="none"
+        stroke={SAGE}
+        strokeWidth="1.05"
+        opacity="0.75"
+      />
     </g>
   );
 }

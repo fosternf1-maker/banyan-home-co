@@ -41,7 +41,15 @@ export default function SketchPage() {
               {sketchIntro.titleStart} <em>{sketchIntro.titleEm}</em>
             </h1>
             <p className="sketch-hero__lede">{sketchIntro.lede}</p>
-            <p className="sketch-hero__hint">{sketchIntro.scrollHint}</p>
+            <p className="sketch-hero__hint sketch-hero__hint--scroll">
+              {sketchIntro.scrollHint}
+            </p>
+            <p className="sketch-hero__hint sketch-hero__hint--simple">
+              {sketchIntro.simpleHint}
+            </p>
+            <p className="sketch-hero__hint sketch-hero__hint--static">
+              {sketchIntro.staticHint}
+            </p>
           </div>
         </section>
 

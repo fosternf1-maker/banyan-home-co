@@ -25,7 +25,7 @@ export const sketchLayers: SketchLayer[] = [
     title: "The May punch list",
     body: "Before the season starts asking, we walk the roof, the openings, the drainage, and the tree line. You get a written list in May, while the work can still be quiet.",
     detail: "Pre-season. South Tampa lots, not a generic checklist.",
-    explode: { x: 0, y: -78 },
+    explode: { x: 0, y: -118 },
   },
   {
     id: "hvac",
@@ -34,7 +34,7 @@ export const sketchLayers: SketchLayer[] = [
     title: "Filters, twice a year",
     body: "Whole-home filter service, on a calendar, so it is not another thing you keep in your head. Signature includes the visit. Platinum includes the filters.",
     detail: "$89 + filters as a scheduled service.",
-    explode: { x: 56, y: 10 },
+    explode: { x: 78, y: 16 },
   },
   {
     id: "dryer",
@@ -43,7 +43,7 @@ export const sketchLayers: SketchLayer[] = [
     title: "The job that waits",
     body: "Dryer vents get cleaned when someone remembers. Membership puts it on the same calendar as the rest of the house, with our own technicians.",
     detail: "$149, scheduled.",
-    explode: { x: -52, y: 8 },
+    explode: { x: -72, y: 14 },
   },
   {
     id: "heater",
@@ -52,7 +52,7 @@ export const sketchLayers: SketchLayer[] = [
     title: "Flush and inspect",
     body: "A yearly flush and inspection. Not a replacement speech. Just the maintenance a Tampa water heater is owed and almost never gets.",
     detail: "$179, on the calendar.",
-    explode: { x: 42, y: 48 },
+    explode: { x: 58, y: 68 },
   },
   {
     id: "irrigation",
@@ -61,7 +61,7 @@ export const sketchLayers: SketchLayer[] = [
     title: "Zones after a wet June",
     body: "The timer you set in March is rarely still right in August. We check the zones, adjust them, and leave the lawn on a schedule that matches this coast.",
     detail: "$129, zone check and adjust.",
-    explode: { x: 0, y: 62 },
+    explode: { x: 0, y: 92 },
   },
   {
     id: "gutters",
@@ -70,7 +70,7 @@ export const sketchLayers: SketchLayer[] = [
     title: "Water has to go somewhere",
     body: "A Tampa afternoon storm is ordinary. Standing water against the house is not. Gutters and grade are checked with the rest of the openings, not as an afterthought.",
     detail: "Read with the roof and the tree line.",
-    explode: { x: 8, y: -46 },
+    explode: { x: 10, y: -68 },
   },
   {
     id: "shutters",
@@ -79,7 +79,7 @@ export const sketchLayers: SketchLayer[] = [
     title: "Booked before the rush",
     body: "Shutter, generator, and sump service on the calendar in spring. We do not wait for the cone to be on television.",
     detail: "Attendance at the house is yours to ask for, or not.",
-    explode: { x: 0, y: -18 },
+    explode: { x: 0, y: -28 },
   },
 ];
 
