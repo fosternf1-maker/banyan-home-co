@@ -82,8 +82,8 @@ export default function SketchPage() {
             </ul>
 
             <p className="sketch-note">
-              Year 1: {neighborhoods.join(", ")}. FishHawk is charter-only, and
-              not part of the public radius yet.
+              South Tampa. Year 1: {neighborhoods.join(", ")}. FishHawk is
+              charter-only, and not part of the public radius yet.
             </p>
 
             <div className="cta__actions">

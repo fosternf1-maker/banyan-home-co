@@ -187,16 +187,8 @@
   max-height: min(58svh, 34rem);
 }
 
-.sketch-plate__caption {
-  position: absolute;
-  left: 1.1rem;
-  bottom: 0.85rem;
-  margin: 0;
-  font-size: 0.68rem;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  font-weight: 600;
-  color: var(--color-ink-3);
+.sketch-plate--stack .hp-layer.is-dim {
+  opacity: 0.42;
 }
 
 .hp-layer {
@@ -415,6 +407,8 @@
   .sketch-stage--scroll .sketch-stage__sticky {
     position: static;
     min-height: 0;
+    max-height: none;
+    overflow: visible;
   }
 
   .sketch-plate {
@@ -423,5 +417,98 @@
 
   .sketch-plate svg {
     max-height: none;
+  }
+}
+
+@media (max-width: 767px) {
+  .sketch-plate--iso {
+    display: none !important;
+  }
+
+  .sketch-plate--stack {
+    display: grid;
+  }
+
+  .sketch-plate {
+    overflow: visible;
+    padding: 0.75rem 0.5rem 0.35rem;
+  }
+
+  .sketch-plate svg {
+    width: 100%;
+    max-width: 22.5rem;
+    max-height: none;
+  }
+
+  .sketch-spec {
+    min-height: 0;
+  }
+
+  .sketch-spec h2 {
+    font-size: 1.75rem;
+    max-width: none;
+  }
+
+  .sketch-spec__index,
+  .sketch-spec__body,
+  .sketch-spec__detail,
+  .sketch-layers button,
+  .sketch-layers a,
+  .sketch-hero__hint,
+  .sketch-banner,
+  .sketch-note,
+  .sketch-tiers li,
+  .sketch-hero__lede {
+    font-size: 1rem;
+  }
+
+  .sketch-spec__name {
+    font-size: 1.125rem;
+  }
+
+  .sketch-spec__index,
+  .sketch-layers button,
+  .sketch-layers a,
+  .sketch-banner,
+  .sketch-hero__hint {
+    letter-spacing: 0.04em;
+  }
+
+  .sketch-layers button,
+  .sketch-layers a {
+    padding: 0.95rem 0;
+    min-height: 2.85rem;
+  }
+
+  .sketch-spec__detail {
+    flex-direction: column;
+    gap: 0.4rem;
+    max-width: none;
+  }
+
+  .sketch-spec__detail span:last-child {
+    white-space: normal;
+  }
+
+  .sketch-spec__body {
+    max-width: none;
+  }
+
+  .sketch-hero h1 {
+    font-size: 2.15rem;
+    max-width: 11ch;
+  }
+
+  .sketch-hero__lede {
+    max-width: none;
+  }
+
+  .cta__actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .cta__actions .btn {
+    width: 100%;
   }
 }

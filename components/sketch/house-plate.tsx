@@ -5,6 +5,7 @@ type Props = {
   activeId: SketchLayerId;
   explode: number;
   onSelect?: (id: SketchLayerId) => void;
+  showLabels?: boolean;
 };
 
 function iso(x: number, y: number, z: number): [number, number] {
@@ -53,7 +54,12 @@ const H = 92;
 const PEAK = 156;
 const PORCH = 44;
 
-export function HousePlate({ activeId, explode, onSelect }: Props) {
+export function HousePlate({
+  activeId,
+  explode,
+  onSelect,
+  showLabels = true,
+}: Props) {
   const dim = explode > 0.14;
 
   function layerClass(id: SketchLayerId) {
@@ -61,7 +67,7 @@ export function HousePlate({ activeId, explode, onSelect }: Props) {
     return `hp-layer${on ? " is-active" : ""}${dim && !on ? " is-dim" : ""}`;
   }
 
-  const tagOn = explode > 0.18;
+  const tagOn = showLabels && explode > 0.18;
 
   return (
     <svg
@@ -70,7 +76,7 @@ export function HousePlate({ activeId, explode, onSelect }: Props) {
       aria-labelledby="house-plate-title house-plate-desc"
     >
       <title id="house-plate-title">
-        South Tampa bungalow taken apart into the jobs Banyan coordinates
+        House taken apart into the jobs Banyan coordinates
       </title>
       <desc id="house-plate-desc">
         A line drawing of a one-story hip-roof house with a front porch, live

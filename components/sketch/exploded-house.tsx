@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import { HousePlate } from "@/components/sketch/house-plate";
+import { HouseStack } from "@/components/sketch/house-stack";
 import {
   sketchIntro,
   sketchLayers,
@@ -146,7 +147,7 @@ export function ExplodedHouse() {
 
       <div className="wrap sketch-stage__sticky">
         <figure
-          className="sketch-plate"
+          className="sketch-plate sketch-plate--iso"
           onPointerDown={onPointerDown}
           onPointerMove={onPointerMove}
           onPointerUp={onPointerUp}
@@ -156,10 +157,11 @@ export function ExplodedHouse() {
             activeId={activeId}
             explode={explode}
             onSelect={goTo}
+            showLabels={mode === "scroll"}
           />
-          <figcaption className="sketch-plate__caption">
-            South Tampa bungalow · architectural plate
-          </figcaption>
+        </figure>
+        <figure className="sketch-plate sketch-plate--stack">
+          <HouseStack activeId={activeId} onSelect={goTo} />
         </figure>
 
         <div className="sketch-spec" aria-live="polite">
