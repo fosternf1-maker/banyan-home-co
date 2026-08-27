@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { BanyanMark } from "@/components/banyan-mark";
 import { legalDisclaimer, site } from "@/lib/site";
 
@@ -23,9 +22,8 @@ export function SiteFooter() {
           </div>
           <div>
             <strong>Membership</strong>
-            <Link href="/#membership">Tiers &amp; pricing</Link>
+            <a href="#membership">Tiers &amp; pricing</a>
             <a href={site.vendorMailto}>Join the vendor network</a>
-            <Link href="/sketch">Sketch of the house</Link>
           </div>
         </div>
         <div className="site-footer__fine">

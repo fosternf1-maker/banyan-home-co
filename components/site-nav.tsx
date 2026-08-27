@@ -1,18 +1,11 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { usePathname } from "next/navigation";
-import Link from "next/link";
 import { ButtonLink } from "@/components/button-link";
 import { Wordmark } from "@/components/wordmark";
 import { navLinks, site } from "@/lib/site";
 
 export function SiteNav() {
-  const pathname = usePathname();
-  const onSketch = pathname.startsWith("/sketch");
-  const links = onSketch
-    ? [{ href: "/", label: "The site" }]
-    : navLinks;
   const [overHero, setOverHero] = useState(true);
   const [open, setOpen] = useState(false);
   const detailsRef = useRef<HTMLDetailsElement>(null);
@@ -59,19 +52,13 @@ export function SiteNav() {
   return (
     <header className={`site-nav site-nav--${tone}${open ? " is-open" : ""}`}>
       <div className="wrap site-nav__inner">
-        <Wordmark size="sm" href={onSketch ? "/" : "#top"} />
+        <Wordmark size="sm" />
         <nav className="site-nav__links" aria-label="Primary">
-          {links.map((link) =>
-            link.href.startsWith("/") ? (
-              <Link key={link.href} href={link.href}>
-                {link.label}
-              </Link>
-            ) : (
-              <a key={link.href} href={link.href}>
-                {link.label}
-              </a>
-            ),
-          )}
+          {navLinks.map((link) => (
+            <a key={link.href} href={link.href}>
+              {link.label}
+            </a>
+          ))}
         </nav>
         <div className="site-nav__end">
           <ButtonLink
@@ -94,17 +81,11 @@ export function SiteNav() {
             </summary>
             <div id="mobile-nav" className="site-nav__drawer">
               <nav aria-label="Mobile">
-                {links.map((link) =>
-                  link.href.startsWith("/") ? (
-                    <Link key={link.href} href={link.href} onClick={closeMenu}>
-                      {link.label}
-                    </Link>
-                  ) : (
-                    <a key={link.href} href={link.href} onClick={closeMenu}>
-                      {link.label}
-                    </a>
-                  ),
-                )}
+                {navLinks.map((link) => (
+                  <a key={link.href} href={link.href} onClick={closeMenu}>
+                    {link.label}
+                  </a>
+                ))}
                 <a href={site.phoneHref} onClick={closeMenu}>
                   {site.phoneDisplay}
                 </a>

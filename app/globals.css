@@ -618,40 +618,80 @@ a {
   position: relative;
   z-index: 1;
   padding-block: clamp(7.25rem, 16vw, 11.5rem) clamp(3.75rem, 8vw, 6.5rem);
+  display: grid;
 }
 
-.hero__inner > * {
+.hero__copy {
+  display: contents;
+}
+
+.hero__inner .wordmark {
+  order: 1;
+}
+
+.hero__inner h1 {
+  order: 2;
+}
+
+.hero__drawing {
+  order: 3;
+  pointer-events: none;
+  width: 100%;
+  margin: 0.15rem 0 1.25rem;
+  justify-self: stretch;
+  background: var(--color-paper);
+  box-shadow:
+    0 0 0 1px rgb(143 102 32 / 0.32),
+    0 18px 40px rgb(0 0 0 / 0.22);
+}
+
+.hero__drawing .house-drawing {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.hero__lede {
+  order: 4;
+}
+
+.hero__actions {
+  order: 5;
+}
+
+.hero__meta {
+  order: 6;
+}
+
+.hero__inner > *,
+.hero__copy > * {
   animation: none;
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  .hero__inner > * {
-    animation: rise 1.15s var(--ease-lux) both;
+  .hero__inner .wordmark {
+    animation: rise 1.15s var(--ease-lux) 0.08s both;
   }
 
-  .hero__inner > :nth-child(1) {
-    animation-delay: 0.08s;
+  .hero__copy > :nth-child(1) {
+    animation: rise 1.15s var(--ease-lux) 0.18s both;
   }
 
-  .hero__inner > :nth-child(2) {
-    animation-delay: 0.22s;
+  .hero__copy > :nth-child(2) {
+    animation: rise 1.15s var(--ease-lux) 0.4s both;
   }
 
-  .hero__inner > :nth-child(3) {
-    animation-delay: 0.36s;
+  .hero__copy > :nth-child(3) {
+    animation: rise 1.15s var(--ease-lux) 0.54s both;
   }
 
-  .hero__inner > :nth-child(4) {
-    animation-delay: 0.5s;
-  }
-
-  .hero__inner > :nth-child(5) {
-    animation-delay: 0.64s;
+  .hero__drawing {
+    animation: rise 1.15s var(--ease-lux) 0.28s both;
   }
 }
 
 .hero__inner .wordmark {
-  margin-bottom: clamp(2.8rem, 7vw, 5rem);
+  margin-bottom: clamp(1.6rem, 5vw, 4.25rem);
 }
 
 .hero h1 {
@@ -695,6 +735,74 @@ a {
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--color-on-dark-2);
+}
+
+.house-drawing,
+.oak-drawing {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.why__head {
+  display: grid;
+  gap: 1rem 2rem;
+  align-items: end;
+  margin-bottom: clamp(2.4rem, 4.5vw, 3.8rem);
+}
+
+.why__head .band-head {
+  margin-bottom: 0;
+}
+
+.why__oak {
+  width: min(100%, 11rem);
+  justify-self: start;
+}
+
+@media (min-width: 960px) {
+  .hero__copy {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    grid-area: copy;
+  }
+
+  .hero__inner {
+    grid-template-columns: minmax(0, 1.08fr) minmax(20rem, 0.92fr);
+    grid-template-areas:
+      "wordmark wordmark"
+      "copy drawing"
+      "meta meta";
+    align-items: center;
+    gap: clamp(1.1rem, 2.4vw, 2.1rem) clamp(1.5rem, 4vw, 3.5rem);
+  }
+
+  .hero__inner .wordmark {
+    grid-area: wordmark;
+  }
+
+  .hero__drawing {
+    grid-area: drawing;
+    width: 100%;
+    max-width: none;
+    margin: 0;
+    justify-self: stretch;
+    align-self: center;
+  }
+
+  .hero__meta {
+    grid-area: meta;
+  }
+
+  .why__head {
+    grid-template-columns: 1fr 12rem;
+  }
+
+  .why__oak {
+    justify-self: end;
+    width: 12rem;
+  }
 }
 
 .friction {
@@ -1346,6 +1454,8 @@ td.featured {
   }
 
   .roots i,
+  .hero__copy > *,
+  .hero__drawing,
   .hero__inner > *,
   .wordmark--lg .wordmark__tree,
   .site-nav__mobile[open] .site-nav__drawer,
