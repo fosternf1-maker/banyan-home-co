@@ -52,18 +52,20 @@ export function HouseDrawing() {
       />
 
       <g>
+        <ellipse cx="92" cy="168" rx="58" ry="42" fill="#7FB3A0" opacity="0.28" />
+        <ellipse cx="148" cy="132" rx="64" ry="48" fill="#2C5145" opacity="0.22" />
         <path
           d="M 28 352 C 34 292 16 242 42 198 C 18 186 14 142 52 128 C 38 92 76 64 118 88 C 130 48 188 42 210 86 C 246 62 280 96 256 132 C 292 146 282 198 248 208 C 258 248 236 304 222 352"
           fill="url(#hd-oak)"
           opacity="0.9"
         />
         <path
-          d="M 118 352 L 124 236 M 86 186 C 108 172 146 178 168 206"
+          d="M 118 352 L 124 236 M 86 186 C 108 172 146 178 168 206 M 148 150 C 132 168 128 198 136 228"
           fill="none"
           stroke="#14211C"
-          strokeWidth="1.2"
+          strokeWidth="1.15"
           strokeLinecap="round"
-          opacity="0.4"
+          opacity="0.38"
         />
       </g>
 
@@ -345,7 +347,8 @@ export function HouseDrawing() {
         </g>
       </g>
 
-      <g opacity="0.52">
+      <g opacity="0.58">
+        <ellipse cx="612" cy="214" rx="42" ry="32" fill="#7FB3A0" opacity="0.45" />
         <path
           d="M 558 352 C 568 300 548 258 580 228 C 562 204 576 172 610 182 C 620 152 656 162 650 196 C 678 208 672 250 642 258 C 654 292 636 332 620 352"
           fill="#2C5145"
@@ -359,37 +362,39 @@ export function OakDrawing() {
   return (
     <svg
       className="oak-drawing"
-      viewBox="0 0 200 88"
+      viewBox="0 0 220 96"
       xmlns="http://www.w3.org/2000/svg"
       role="presentation"
       aria-hidden="true"
       focusable="false"
     >
+      <ellipse cx="78" cy="38" rx="52" ry="28" fill="#7FB3A0" opacity="0.22" />
       <path
-        d="M 16 72 C 22 48 12 28 28 18 C 16 8 32 -2 48 10 C 56 -6 84 -4 90 16 C 108 4 128 18 116 34 C 136 40 130 62 112 66 C 108 78 88 86 70 72"
+        d="M 18 78 C 24 52 12 30 30 18 C 16 6 36 -4 52 10 C 62 -8 92 -6 98 16 C 118 4 140 18 126 36 C 148 42 140 66 120 70 C 116 84 94 92 74 78"
         fill="#2C5145"
-        opacity="0.14"
+        opacity="0.16"
       />
       <path
-        d="M 16 72 C 22 48 12 28 28 18 C 16 8 32 -2 48 10 C 56 -6 84 -4 90 16 C 108 4 128 18 116 34 C 136 40 130 62 112 66"
+        d="M 18 78 C 24 52 12 30 30 18 C 16 6 36 -4 52 10 C 62 -8 92 -6 98 16 C 118 4 140 18 126 36 C 148 42 140 66 120 70"
         fill="none"
         stroke="#2C5145"
-        strokeWidth="1.15"
+        strokeWidth="1.2"
         strokeLinejoin="round"
       />
       <path
-        d="M 58 72 L 62 28 M 48 40 C 58 34 74 36 82 48"
+        d="M 62 78 L 68 28 M 48 42 C 60 34 78 36 88 52 M 78 36 C 86 48 90 62 86 74"
         fill="none"
         stroke="#14211C"
         strokeWidth="1"
-        opacity="0.45"
+        strokeLinecap="round"
+        opacity="0.42"
       />
       <path
-        d="M 118 44 C 140 38 168 52 184 44"
+        d="M 132 48 C 158 40 188 56 208 46"
         fill="none"
         stroke="#7FB3A0"
-        strokeWidth="1.1"
-        opacity="0.8"
+        strokeWidth="1.15"
+        opacity="0.85"
       />
     </svg>
   );

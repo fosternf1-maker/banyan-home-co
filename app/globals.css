@@ -625,6 +625,17 @@ a {
   display: contents;
 }
 
+.hero .wordmark--lg {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1.15rem;
+}
+
+.hero .wordmark--lg .wordmark__tree {
+  width: min(100%, 15.5rem);
+  height: auto;
+}
+
 .hero__inner .wordmark {
   order: 1;
 }
@@ -761,6 +772,10 @@ a {
 }
 
 @media (min-width: 960px) {
+  .hero .wordmark--lg .wordmark__tree {
+    width: min(100%, 19rem);
+  }
+
   .hero__copy {
     display: flex;
     flex-direction: column;
@@ -769,17 +784,20 @@ a {
   }
 
   .hero__inner {
-    grid-template-columns: minmax(0, 1.08fr) minmax(20rem, 0.92fr);
+    grid-template-columns: minmax(0, 1fr) minmax(26rem, 34rem);
     grid-template-areas:
-      "wordmark wordmark"
-      "copy drawing"
+      "wordmark drawing"
+      "copy copy"
       "meta meta";
-    align-items: center;
-    gap: clamp(1.1rem, 2.4vw, 2.1rem) clamp(1.5rem, 4vw, 3.5rem);
+    align-items: end;
+    gap: clamp(1.1rem, 2.4vw, 2.1rem) clamp(1.75rem, 4vw, 3.75rem);
+    padding-block: clamp(6.25rem, 8.5vw, 8rem) clamp(3.25rem, 6vw, 5.5rem);
   }
 
   .hero__inner .wordmark {
     grid-area: wordmark;
+    justify-self: start;
+    align-self: end;
   }
 
   .hero__drawing {
@@ -788,7 +806,7 @@ a {
     max-width: none;
     margin: 0;
     justify-self: stretch;
-    align-self: center;
+    align-self: end;
   }
 
   .hero__meta {
