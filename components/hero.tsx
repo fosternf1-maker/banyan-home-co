@@ -1,5 +1,4 @@
 import { ButtonLink } from "@/components/button-link";
-import { HouseDrawing } from "@/components/house-drawing";
 import { Wordmark } from "@/components/wordmark";
 import { site } from "@/lib/site";
 
@@ -33,27 +32,22 @@ export function Hero() {
       </div>
       <div className="wrap hero__inner">
         <Wordmark size="lg" mark="living" href="#top" />
-        <div className="hero__copy">
-          <h1>
-            Owning the house was supposed to be the <em>reward.</em>
-          </h1>
-          <p className="hero__lede">
-            Banyan is a private membership for Tampa homeowners who are done
-            vetting contractors at nine at night. One number. A network of trades
-            we&apos;ve already checked. And someone from our team standing in your
-            kitchen when they arrive.
-          </p>
-          <div className="hero__actions">
-            <ButtonLink href={site.auditMailto} variant="primary">
-              Book a home health audit
-            </ButtonLink>
-            <ButtonLink href="#membership" variant="ghost">
-              See membership
-            </ButtonLink>
-          </div>
-        </div>
-        <div className="hero__drawing" aria-hidden="true">
-          <HouseDrawing />
+        <h1>
+          Owning the house was supposed to be the <em>reward.</em>
+        </h1>
+        <p className="hero__lede">
+          Banyan is a private membership for Tampa homeowners who are done
+          vetting contractors at nine at night. One number. A network of trades
+          we&apos;ve already checked. And someone from our team standing in your
+          kitchen when they arrive.
+        </p>
+        <div className="hero__actions">
+          <ButtonLink href={site.auditMailto} variant="primary">
+            Book a home health audit
+          </ButtonLink>
+          <ButtonLink href="#membership" variant="ghost">
+            See membership
+          </ButtonLink>
         </div>
         <ul className="hero__meta">
           <li>South Tampa</li>
