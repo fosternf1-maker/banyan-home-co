@@ -45,7 +45,7 @@ export function Hero() {
           <ButtonLink href={site.auditMailto} variant="primary">
             Write to us
           </ButtonLink>
-          <ButtonLink href="#membership" variant="ghost">
+          <ButtonLink href="/#membership" variant="ghost">
             See planned membership
           </ButtonLink>
         </div>

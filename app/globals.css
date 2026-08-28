@@ -1243,6 +1243,33 @@ td.featured {
   margin-bottom: 2rem;
 }
 
+.legal {
+  padding-block: calc(var(--nav) + 3.25rem) 4.5rem;
+}
+
+.legal__article {
+  max-width: 42rem;
+}
+
+.legal h1 {
+  font-size: var(--step-3);
+  line-height: 1.1;
+  margin: 0.85rem 0 1.6rem;
+}
+
+.legal h2 {
+  font-size: var(--step-1);
+  margin: 2.1rem 0 0.7rem;
+}
+
+.legal p {
+  color: var(--color-ink-2);
+}
+
+.legal p + p {
+  margin-top: 0.9rem;
+}
+
 .link-liquid {
   background-image: linear-gradient(currentColor, currentColor);
   background-position: 0 100%;

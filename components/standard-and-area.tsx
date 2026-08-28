@@ -9,6 +9,7 @@ export function StandardAndArea() {
           <SectionHeader
             eyebrow="The standard"
             title='What "vetted" means.'
+            lede="The bar we will hold for trades. It is not a live roster — no vendors are signed yet."
           />
           <ul className="checks">
             {vettingItems.map((item) => (

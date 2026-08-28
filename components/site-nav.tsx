@@ -1,14 +1,18 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { usePathname } from "next/navigation";
 import { ButtonLink } from "@/components/button-link";
 import { Wordmark } from "@/components/wordmark";
 import { navLinks, site } from "@/lib/site";
 
 export function SiteNav() {
-  const [overHero, setOverHero] = useState(true);
+  const pathname = usePathname();
+  const onHome = pathname === "/";
+  const [heroInView, setHeroInView] = useState(true);
   const [open, setOpen] = useState(false);
   const detailsRef = useRef<HTMLDetailsElement>(null);
+  const overHero = onHome && heroInView;
 
   useEffect(() => {
     const hero = document.getElementById("hero");
@@ -16,7 +20,7 @@ export function SiteNav() {
 
     const observer = new IntersectionObserver(
       ([entry]) => {
-        setOverHero(entry.isIntersecting);
+        setHeroInView(entry.isIntersecting);
       },
       { threshold: 0, rootMargin: "-72px 0px 0px 0px" },
     );
@@ -52,7 +56,7 @@ export function SiteNav() {
   return (
     <header className={`site-nav site-nav--${tone}${open ? " is-open" : ""}`}>
       <div className="wrap site-nav__inner">
-        <Wordmark size="sm" />
+        <Wordmark size="sm" href="/" />
         <nav className="site-nav__links" aria-label="Primary">
           {navLinks.map((link) => (
             <a key={link.href} href={link.href}>

@@ -38,9 +38,9 @@ export const site = {
 } as const;
 
 export const navLinks = [
-  { href: "#how-it-works", label: "How it works" },
-  { href: "#membership", label: "Membership" },
-  { href: "#questions", label: "Questions" },
+  { href: "/#how-it-works", label: "How it works" },
+  { href: "/#membership", label: "Membership" },
+  { href: "/#questions", label: "Questions" },
 ] as const;
 
 export const friction = [
@@ -197,8 +197,8 @@ export const coastItems = [
 ] as const;
 
 export const vettingItems = [
-  "Active Florida state licence, verified through DBPR and re-checked every quarter",
-  "General liability and workers' compensation on file, with Banyan named as additional insured",
+  "Florida state licence, verified through DBPR — with a planned quarterly re-check once trades are on the roster",
+  "General liability and workers' compensation on file, with Banyan named as additional insured, once the entity exists",
   "Background check on every individual who enters a member's home",
   "Three verified references from completed residential work",
   "Written flat-rate or not-to-exceed pricing, agreed in advance",
@@ -244,8 +244,8 @@ export const faqs = [
   {
     q: "Can I cancel?",
     a: [
-      "Any time, with 30 days' notice. Monthly memberships are month to month — there's no term, no early-termination fee, and no clause you'll find later.",
-      "Annual members who cancel mid-term are refunded the unused months less the two-month prepay discount.",
+      "Planned, once membership is actually for sale: monthly memberships month to month, 30 days' notice, no early-termination fee. Annual memberships cancelled mid-term would be refunded unused months less the two-month prepay discount.",
+      "Those are not terms in force today. There is no membership agreement yet, and visiting this site or writing to us does not create one.",
     ],
   },
   {
