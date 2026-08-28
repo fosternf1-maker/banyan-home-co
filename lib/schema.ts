@@ -1,4 +1,4 @@
-import { faqs, neighborhoods, site } from "@/lib/site";
+import { faqs, neighborhoods, site, year1Zips } from "@/lib/site";
 
 export function localBusinessJsonLd() {
   return {
@@ -14,7 +14,11 @@ export function localBusinessJsonLd() {
         "@type": "Place" as const,
         name: `${name}, Tampa, FL`,
       })),
-      { "@type": "Place" as const, name: "Tampa, FL" },
+      ...year1Zips.map((postalCode) => ({
+        "@type": "Place" as const,
+        name: `Tampa, FL ${postalCode}`,
+      })),
+      { "@type": "Place" as const, name: "South Tampa, FL" },
     ],
   };
 }

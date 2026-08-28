@@ -10,9 +10,9 @@ export function SiteFooter() {
             <BanyanMark className="site-footer__mark" />
             <strong className="site-footer__name">{site.name}</strong>
             <p>
-              Private home management for Tampa homeowners.
+              Private home management for South Tampa.
               <br />
-              South Tampa
+              Opening mid-January 2027
             </p>
           </div>
           <div>
@@ -23,7 +23,7 @@ export function SiteFooter() {
           <div>
             <strong>Membership</strong>
             <a href="#membership">Tiers &amp; pricing</a>
-            <a href={site.vendorMailto}>Join the vendor network</a>
+            <a href={site.vendorMailto}>Write about the trade network</a>
           </div>
         </div>
         <div className="site-footer__fine">

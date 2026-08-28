@@ -1,7 +1,7 @@
 import { ImageResponse } from "next/og";
 import { site } from "@/lib/site";
 
-export const alt = `${site.name} — private home management for Tampa homeowners`;
+export const alt = `${site.name} — South Tampa home management, opening 2027`;
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -54,8 +54,7 @@ export default function OpenGraphImage() {
               lineHeight: 1.4,
             }}
           >
-            Private membership for Tampa homeowners. One number. A vetted
-            network. Someone from our team at the house.
+            Private membership for South Tampa. Opening mid-January 2027.
           </div>
         </div>
       </div>

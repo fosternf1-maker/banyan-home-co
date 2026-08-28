@@ -36,23 +36,23 @@ export function Hero() {
           Owning the house was supposed to be the <em>reward.</em>
         </h1>
         <p className="hero__lede">
-          Banyan is a private membership for Tampa homeowners who are done
-          vetting contractors at nine at night. One number. A network of trades
-          we&apos;ve already checked. And someone from our team standing in your
-          kitchen when they arrive.
+          Banyan is a private membership for South Tampa homeowners who are
+          done vetting contractors at nine at night. One number. Independent
+          licensed trades, introduced as your disclosed agent. And a Home
+          Manager at the house when they arrive — if you want us there.
         </p>
         <div className="hero__actions">
           <ButtonLink href={site.auditMailto} variant="primary">
-            Book a home health audit
+            Write to us
           </ButtonLink>
           <ButtonLink href="#membership" variant="ghost">
-            See membership
+            See planned membership
           </ButtonLink>
         </div>
         <ul className="hero__meta">
           <li>South Tampa</li>
-          <li>Founding members now</li>
-          <li>Est. 2026</li>
+          <li>Opens mid-January 2027</li>
+          <li>Planned pricing</li>
         </ul>
       </div>
     </section>

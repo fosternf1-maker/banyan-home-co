@@ -66,7 +66,7 @@ export function SiteNav() {
             variant={tone === "dark" ? "primary" : "ink"}
             className="site-nav__cta"
           >
-            Book the audit
+            Write to us
           </ButtonLink>
           <details
             ref={detailsRef}
@@ -90,7 +90,7 @@ export function SiteNav() {
                   {site.phoneDisplay}
                 </a>
                 <ButtonLink href={site.auditMailto} variant="ink">
-                  Book your home health audit
+                  Write to us
                 </ButtonLink>
               </nav>
             </div>

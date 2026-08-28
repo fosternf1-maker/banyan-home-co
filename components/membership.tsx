@@ -39,7 +39,7 @@ export function Membership() {
         <SectionHeader
           eyebrow="Membership"
           title="Three tiers. No contracts longer than a month."
-          lede="Pay monthly, or pay for the year and get two months back."
+          lede="Planned pricing — membership opens mid-January 2027. Pay monthly, or pay for the year and get two months back."
         />
 
         <div className="tiers-desktop">
@@ -114,10 +114,11 @@ export function Membership() {
         </div>
 
         <p className="tiers-note">
-          A one-time $350 initiation covers your first Home Health Audit and
-          the build of your home&apos;s file. Contractor work is quoted and
-          invoiced to you directly by the licensed trade performing it — Banyan
-          never marks it up.
+          A one-time $350 initiation is planned for the first Home Health Audit
+          and the build of the home&apos;s file. Independent licensed trades do
+          the work. Banyan pays them as your disclosed agent within five
+          business days of an approved invoice, never marks the work up, and
+          takes nothing from the trade.
         </p>
       </div>
     </section>

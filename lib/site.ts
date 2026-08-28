@@ -12,24 +12,27 @@ export const neighborhoods = [
   "Culbreath Isles",
 ] as const;
 
+export const year1Zips = ["33606", "33609", "33611", "33629"] as const;
+
 export const site = {
   name: "Banyan Home Co.",
   shortName: "Banyan",
   documentTitle: "Banyan Home Co. · South Tampa home management",
   description:
-    "Banyan Home Co. is a private home management membership for Tampa homeowners. One number, a vetted network of licensed trades, and someone from our team at your home when they arrive.",
+    "Banyan Home Co. is a private home management membership for South Tampa, opening mid-January 2027. One number, independent licensed trades introduced as your disclosed agent, and a Home Manager at the house if you want one.",
   url: "https://banyan-home-co.vercel.app",
   email: EMAIL,
   telephone: TELEPHONE,
   phoneDisplay: "(813) 330-0480",
   phoneHref: `tel:${TELEPHONE}`,
-  auditMailto: `mailto:${EMAIL}?subject=Home%20Health%20Audit`,
-  vendorMailto: `mailto:${EMAIL}?subject=Vendor%20network`,
-  waitlistMailto: `mailto:${EMAIL}?subject=Waitlist`,
+  auditMailto: `mailto:${EMAIL}?subject=Banyan%20Home%20Co.`,
+  vendorMailto: `mailto:${EMAIL}?subject=Trade%20network`,
+  areaMailto: `mailto:${EMAIL}`,
   keywords: [
     "South Tampa",
     "home maintenance membership",
     "home management",
+    ...year1Zips,
     ...neighborhoods,
   ],
 } as const;
@@ -62,19 +65,19 @@ export const friction = [
 export const steps = [
   {
     title: "We learn the house",
-    body: "Your membership opens with a Home Health Audit — a full walkthrough, a written report on every system, and a maintenance calendar built for your specific house.",
+    body: "Membership opens with a Home Health Audit — a full walkthrough, a written report on every system, and a maintenance calendar built for that specific house.",
   },
   {
     title: "You call one number",
-    body: "Something breaks, or something's due. You text or call. We triage it and dispatch the right trade from our vetted network — at the member rate we negotiated on your behalf.",
+    body: "Something breaks, or something's due. You text or call. We triage it and introduce the right independent licensed trade as your disclosed agent — at the member rate, with no markup.",
   },
   {
     title: "We're there if you want us",
-    body: "A Banyan Home Manager meets the contractor, lets them in, confirms the scope, photographs the work, and secures the house. Or you handle it yourself. Your call, every time.",
+    body: "A Banyan Home Manager meets the trade, lets them in, confirms the scope, photographs the work, and secures the house. Or you handle it yourself. Your call, every time.",
   },
   {
     title: "It goes on the record",
-    body: "Every visit, invoice, warranty and photo lands in your home's file. When you sell, you hand the buyer a documented maintenance history instead of a shrug.",
+    body: "Every visit, invoice, and photograph lands in the home's file. When you sell, you hand the buyer a documented maintenance history instead of a shrug.",
   },
 ] as const;
 
@@ -92,7 +95,7 @@ export const membershipRows: {
   values: Record<TierId, string>;
 }[] = [
   {
-    feature: "Vetted vendor network & member pricing",
+    feature: "Licensed trades at member rates",
     values: {
       essentials: "yes",
       signature: "yes",
@@ -125,7 +128,7 @@ export const membershipRows: {
   },
   {
     feature: "Attended service visits",
-    note: "we meet the contractor, if you'd like us to",
+    note: "we meet the trade, if you'd like us to",
     values: {
       essentials: "2 / year",
       signature: "8 / year",
@@ -181,23 +184,23 @@ export const scheduledServices = [
   { name: "Water heater flush & inspection", price: "$179" },
   { name: "Whole-home plumbing inspection", price: "$199" },
   { name: "Hurricane pre-season readiness", price: "$349" },
-  { name: "Post-storm documented inspection", price: "$249" },
+  { name: "Post-storm inspection", price: "$249" },
   { name: "Handyman hours", price: "$95 / hr" },
 ] as const;
 
 export const coastItems = [
   "Pre-season inspection of roof, openings, drainage and tree line, with a written punch list in May",
   "Shutter, generator and sump service booked before the rush, not during it",
-  "Pre-landfall securing for members who are out of town",
-  "Post-storm inspection with photo documentation formatted for an insurance claim",
-  "Standing relationships with mitigation contractors — the ones who are unreachable in October unless you already know them",
+  "Pre-landfall securing when you are out of town",
+  "Post-storm inspection of roof, openings, and drainage",
+  "Mitigation trades introduced before October, when the good ones are already booked",
 ] as const;
 
 export const vettingItems = [
   "Active Florida state licence, verified through DBPR and re-checked every quarter",
   "General liability and workers' compensation on file, with Banyan named as additional insured",
   "Background check on every individual who enters a member's home",
-  "Three verified references minimum, at least one from a Banyan member",
+  "Three verified references from completed residential work",
   "Written flat-rate or not-to-exceed pricing, agreed in advance",
   "A signed response-time commitment — and removal from the network if it slips",
 ] as const;
@@ -206,36 +209,36 @@ export const faqs = [
   {
     q: "Is this a home warranty?",
     a: [
-      "No — and the distinction matters. Banyan is not a warranty, a service contract, or insurance. We do not cover the cost of repairs and we do not promise to replace anything when it fails.",
-      "What your membership buys is coordination, vetting, scheduled maintenance services, pricing we negotiated on your behalf, and our people at your house. When something needs fixing, a licensed contractor quotes it and bills you directly.",
+      "No — and the distinction matters. Banyan is not a warranty, a service contract, or insurance. We do not pay for repairs and we do not promise to replace anything when it fails.",
+      "What membership buys is coordination, introductions to licensed trades, scheduled maintenance, pricing negotiated on your behalf, and our people at the house if you want them. When something needs fixing, an independent licensed trade does the work. Banyan never marks that work up.",
     ],
   },
   {
     q: "So who am I actually paying?",
     a: [
-      "Two separate things. You pay Banyan a membership fee for the service above. You pay the contractor directly for their work, at the member rate, on their invoice.",
-      "We never mark up contractor work and we never hold your repair funds. That keeps the incentives clean: we have no reason to want the job to be bigger than it is.",
+      "Two separate things. You pay Banyan a membership fee for the service above. Independent licensed trades do the repairs. They invoice Banyan; we pay them as your disclosed agent within five business days of an approved invoice, with no markup.",
+      "You remain the contracting party for the trade's work. We take no kickbacks, referral fees, or any other compensation from vendors. That keeps the incentives clean: we have no reason to want the job to be bigger than it is.",
     ],
   },
   {
     q: 'What does "attended service visit" mean, exactly?',
     a: [
-      "A Banyan Home Manager comes to your house at the appointment window, lets the contractor in, confirms the scope matches what was quoted, stays through the work, photographs the result, and locks up.",
-      "It's entirely your choice. Plenty of members prefer to be there themselves, and that's fine — attendance is something you request, not something we impose. Nothing about your membership changes if you never use it.",
+      "A Banyan Home Manager comes to the house at the appointment window, lets the trade in, confirms the scope matches what was quoted, stays through the work, photographs the result, and locks up.",
+      "It's entirely your choice. You can be there yourself — attendance is something you request, not something we impose. Nothing about membership changes if you never use it.",
     ],
   },
   {
     q: "How do you handle keys and alarm codes?",
     a: [
       "We prefer temporary smart-lock codes that expire after the appointment. Where a physical key is necessary, it lives in a numbered lockbox with no address on it, and every issue and return is logged.",
-      "Our employees are background-checked, bonded, and W-2 — not contractors we found last week. We hold this to a higher standard than most people hold their own spare key, because we have to.",
+      "Home Managers are background-checked, bonded, W-2 employees — not the trades doing the work. Keys are never handed to a vendor to keep.",
     ],
   },
   {
     q: "What if a contractor you sent does bad work?",
     a: [
       "You call us, not them. We handle the remediation conversation, and we hold the leverage in that conversation because they want to stay in the network.",
-      "Every vendor carries their own liability insurance with Banyan named as additional insured, and a vendor who produces a bad outcome twice is removed. Our recommendation is only worth something if it costs us something.",
+      "Every trade carries their own liability insurance with Banyan named as additional insured, and a vendor who produces a bad outcome twice is removed. An introduction is only worth something if it costs us something.",
     ],
   },
   {
@@ -248,22 +251,22 @@ export const faqs = [
   {
     q: "Where in Tampa do you work?",
     a: [
-      "Year 1 is South Tampa only: Hyde Park, Palma Ceia, Beach Park, Davis Islands, Harbour Island, Bayshore, Sunset Park, and Culbreath Isles. We stay inside that radius on purpose. We are not taking members outside it yet.",
+      "Year 1 public area is South Tampa only: 33606, 33609, 33611, and 33629, including Beach Park and Davis Islands — Hyde Park, Palma Ceia, Harbour Island, Bayshore, Sunset Park, and Culbreath Isles. We stay inside that radius on purpose. Membership opens mid-January 2027.",
     ],
   },
   {
     q: "Do you repair the house yourselves?",
     a: [
-      "No. Banyan is a membership, not a repair company and not a warranty. Licensed trades do the work and invoice you directly. We coordinate, vet, and attend if you want us there.",
+      "No. Banyan is a membership, not a repair company. Independent licensed trades do the work. We coordinate, introduce them as your disclosed agent, pay them in five business days on your behalf, and attend if you want us there. We never mark up third-party repairs.",
     ],
   },
   {
     q: "How does hurricane season work?",
     a: [
-      "We are not an insurer and we do not handle claims. Signature and Platinum include hurricane readiness, scheduled before the season. After a storm we can document the house. Claims stay with your carrier.",
+      "We are not an insurer. Signature and Platinum include hurricane-season readiness, scheduled before the season. After a storm we can inspect the house. Anything that follows is between you and your carrier.",
     ],
   },
 ] as const;
 
 export const legalDisclaimer =
-  "Banyan Home Co. is a home management and coordination service. It is not a home warranty association, service warranty association, or insurer, and it does not provide, underwrite, or pay for repair or replacement of any home system, appliance, or component. Contractor services are performed by independent, appropriately licensed third parties who contract with and invoice the homeowner directly. Banyan Home Co. receives no compensation from any vendor in its network.";
+  "Banyan Home Co. is a home management and coordination service. It is not an insurer, and it does not pay for repair or replacement of any home system, appliance, or component. Independent licensed trades perform the work. Banyan pays those trades as the member's disclosed agent within five business days of an approved invoice, never marks up third-party repairs, and takes no compensation from any vendor.";

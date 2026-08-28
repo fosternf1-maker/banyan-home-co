@@ -5,21 +5,24 @@ export function FinalCta() {
   return (
     <section id="audit" className="band cta rise">
       <div className="wrap">
-        <p className="eyebrow">Founding members</p>
+        <p className="eyebrow">Mid-January 2027</p>
         <h2>
-          Start with the audit.
+          Write to us.
           <br />
           Decide afterwards.
         </h2>
         <p>
-          We&apos;ll walk your home for an hour, document every system, and
-          hand you a written report on what needs attention in the next twelve
-          months. No charge, no obligation. Take the list and hire whoever you
-          like — or let us take it from there.
+          Membership is not open yet. When it is, it begins with a Home Health
+          Audit — a walkthrough, a written report, and a calendar for that
+          house. Until then,{" "}
+          <a className="link-liquid" href={`mailto:${site.email}`}>
+            {site.email}
+          </a>{" "}
+          is the right door.
         </p>
         <div className="cta__actions">
           <ButtonLink href={site.auditMailto} variant="ink">
-            Book your home health audit
+            Write to us
           </ButtonLink>
           <ButtonLink href={site.phoneHref} variant="outline">
             {site.phoneDisplay}

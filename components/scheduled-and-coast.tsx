@@ -9,7 +9,7 @@ export function ScheduledAndCoast() {
           <SectionHeader
             eyebrow="Scheduled services"
             title="The jobs everybody puts off."
-            lede="Performed by our own technicians, on a calendar, so you never have to remember them."
+            lede="Independent licensed trades, on a calendar, so you never have to remember them. Prices below are planned à la carte rates — Banyan does not mark these jobs up."
           />
           <ul className="services">
             {scheduledServices.map((service) => (

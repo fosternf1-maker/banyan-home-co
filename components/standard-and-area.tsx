@@ -8,7 +8,7 @@ export function StandardAndArea() {
         <div>
           <SectionHeader
             eyebrow="The standard"
-            title='What "vetted" actually means.'
+            title='What "vetted" means.'
           />
           <ul className="checks">
             {vettingItems.map((item) => (
@@ -22,9 +22,9 @@ export function StandardAndArea() {
             title="Deliberately small."
           />
           <p className="prose">
-            We serve a tight radius on purpose. Fifteen minutes between members
-            is what lets us promise same-day attendance and actually mean it.
-            We&apos;d rather be excellent across a few neighbourhoods than
+            Year 1 is South Tampa only — 33606, 33609, 33611, and 33629,
+            including Beach Park and Davis Islands. A tight radius on purpose.
+            We would rather be excellent across a few neighbourhoods than
             adequate across a metro.
           </p>
           <ul className="neighborhoods">
@@ -33,11 +33,10 @@ export function StandardAndArea() {
             ))}
           </ul>
           <p className="fine-print">
-            Outside these neighbourhoods,{" "}
-            <a className="link-liquid" href={site.waitlistMailto}>
-              join the waitlist
-            </a>{" "}
-            — we expand by neighbourhood, not by advertisement.
+            If you are outside this area, email{" "}
+            <a className="link-liquid" href={site.areaMailto}>
+              {site.email}
+            </a>. We expand by neighbourhood, not by advertisement.
           </p>
         </div>
       </div>
