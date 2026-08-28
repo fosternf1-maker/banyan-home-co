@@ -7,7 +7,7 @@ export function FinalCta() {
       <div className="wrap">
         <p className="eyebrow">Mid-January 2027</p>
         <h2>
-          Write to us.
+          Contact us.
           <br />
           Decide afterwards.
         </h2>
@@ -15,19 +15,23 @@ export function FinalCta() {
           Membership is not open yet. When it is, it begins with a Home Health
           Audit — a walkthrough, a written report, and a calendar for that
           house. Until then,{" "}
-          <a className="link-liquid" href={`mailto:${site.email}`}>
-            {site.email}
+          <a className="link-liquid" href={site.phoneHref}>
+            {site.phoneDisplay}
           </a>{" "}
-          is the right door.
+          is the main door.
         </p>
         <div className="cta__actions">
-          <ButtonLink href={site.auditMailto} variant="ink">
-            Write to us
-          </ButtonLink>
-          <ButtonLink href={site.phoneHref} variant="outline">
-            {site.phoneDisplay}
+          <ButtonLink href={site.phoneHref} variant="ink">
+            Contact us
           </ButtonLink>
         </div>
+        <p className="cta__quiet">
+          Or write{" "}
+          <a className="link-liquid" href={`mailto:${site.email}`}>
+            {site.email}
+          </a>
+          .
+        </p>
       </div>
     </section>
   );

@@ -1127,7 +1127,7 @@ td.featured {
   max-width: 14ch;
 }
 
-.cta p:not(.eyebrow) {
+.cta p:not(.eyebrow):not(.cta__quiet) {
   color: var(--color-ink-2);
   font-size: var(--step-1);
   margin-block: 1.35rem 2.4rem;
@@ -1141,6 +1141,12 @@ td.featured {
   display: flex;
   flex-wrap: wrap;
   gap: 0.85rem 1.1rem;
+}
+
+.cta__quiet {
+  margin-block: 1.1rem 0;
+  font-size: var(--step-0);
+  color: var(--color-ink-3);
 }
 
 .site-footer {

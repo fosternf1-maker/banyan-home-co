@@ -21,7 +21,11 @@ export default function PrivacyPage() {
         <a className="link-liquid" href={`mailto:${site.email}`}>
           {site.email}
         </a>{" "}
-        or call {site.phoneDisplay}, that correspondence goes to Nathan Foster
+        or call{" "}
+        <a className="link-liquid" href={site.phoneHref}>
+          {site.phoneDisplay}
+        </a>
+        , that correspondence goes to Nathan Foster
         while the business is being formed. We do not run a name-capture form
         on this site.
       </p>

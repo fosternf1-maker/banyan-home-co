@@ -245,7 +245,7 @@ export const faqs = [
     q: "Can I cancel?",
     a: [
       "Planned, once membership is actually for sale: monthly memberships month to month, 30 days' notice, no early-termination fee. Annual memberships cancelled mid-term would be refunded unused months less the two-month prepay discount.",
-      "Those are not terms in force today. There is no membership agreement yet, and visiting this site or writing to us does not create one.",
+      "Those are not terms in force today. There is no membership agreement yet, and visiting this site or contacting us does not create one.",
     ],
   },
   {

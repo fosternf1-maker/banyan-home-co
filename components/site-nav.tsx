@@ -66,11 +66,11 @@ export function SiteNav() {
         </nav>
         <div className="site-nav__end">
           <ButtonLink
-            href={site.auditMailto}
+            href={site.phoneHref}
             variant={tone === "dark" ? "primary" : "ink"}
             className="site-nav__cta"
           >
-            Write to us
+            Contact us
           </ButtonLink>
           <details
             ref={detailsRef}
@@ -90,11 +90,8 @@ export function SiteNav() {
                     {link.label}
                   </a>
                 ))}
-                <a href={site.phoneHref} onClick={closeMenu}>
-                  {site.phoneDisplay}
-                </a>
-                <ButtonLink href={site.auditMailto} variant="ink">
-                  Write to us
+                <ButtonLink href={site.phoneHref} variant="ink">
+                  Contact us
                 </ButtonLink>
               </nav>
             </div>

@@ -18,8 +18,8 @@ export function SiteFooter() {
           </div>
           <div>
             <strong>Contact</strong>
-            <a href={`mailto:${site.email}`}>{site.email}</a>
             <a href={site.phoneHref}>{site.phoneDisplay}</a>
+            <a href={`mailto:${site.email}`}>{site.email}</a>
           </div>
           <div>
             <strong>Membership</strong>

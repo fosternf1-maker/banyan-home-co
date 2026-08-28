@@ -42,8 +42,8 @@ export function Hero() {
           Manager at the house when they arrive — if you want us there.
         </p>
         <div className="hero__actions">
-          <ButtonLink href={site.auditMailto} variant="primary">
-            Write to us
+          <ButtonLink href={site.phoneHref} variant="primary">
+            Contact us
           </ButtonLink>
           <ButtonLink href="/#membership" variant="ghost">
             See planned membership
