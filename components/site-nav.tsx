@@ -1,0 +1,103 @@
+"use client";
+
+import { useEffect, useRef, useState } from "react";
+import { usePathname } from "next/navigation";
+import { ButtonLink } from "@/components/button-link";
+import { Wordmark } from "@/components/wordmark";
+import { navLinks, site } from "@/lib/site";
+
+export function SiteNav() {
+  const pathname = usePathname();
+  const onHome = pathname === "/";
+  const [heroInView, setHeroInView] = useState(true);
+  const [open, setOpen] = useState(false);
+  const detailsRef = useRef<HTMLDetailsElement>(null);
+  const overHero = onHome && heroInView;
+
+  useEffect(() => {
+    const hero = document.getElementById("hero");
+    if (!hero) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setHeroInView(entry.isIntersecting);
+      },
+      { threshold: 0, rootMargin: "-72px 0px 0px 0px" },
+    );
+
+    observer.observe(hero);
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    document.body.classList.toggle("nav-open", open);
+    return () => document.body.classList.remove("nav-open");
+  }, [open]);
+
+  useEffect(() => {
+    if (!open) return;
+
+    function onKey(event: KeyboardEvent) {
+      if (event.key === "Escape") {
+        detailsRef.current?.removeAttribute("open");
+      }
+    }
+
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [open]);
+
+  const tone = overHero && !open ? "dark" : "light";
+
+  function closeMenu() {
+    detailsRef.current?.removeAttribute("open");
+  }
+
+  return (
+    <header className={`site-nav site-nav--${tone}${open ? " is-open" : ""}`}>
+      <div className="wrap site-nav__inner">
+        <Wordmark size="sm" href="/" />
+        <nav className="site-nav__links" aria-label="Primary">
+          {navLinks.map((link) => (
+            <a key={link.href} href={link.href}>
+              {link.label}
+            </a>
+          ))}
+        </nav>
+        <div className="site-nav__end">
+          <ButtonLink
+            href={site.phoneHref}
+            variant={tone === "dark" ? "primary" : "ink"}
+            className="site-nav__cta"
+          >
+            Contact us
+          </ButtonLink>
+          <details
+            ref={detailsRef}
+            className="site-nav__mobile"
+            onToggle={(event) => {
+              setOpen(event.currentTarget.open);
+            }}
+          >
+            <summary className="site-nav__menu">
+              <span className="site-nav__menu-open">Menu</span>
+              <span className="site-nav__menu-close">Close</span>
+            </summary>
+            <div id="mobile-nav" className="site-nav__drawer">
+              <nav aria-label="Mobile">
+                {navLinks.map((link) => (
+                  <a key={link.href} href={link.href} onClick={closeMenu}>
+                    {link.label}
+                  </a>
+                ))}
+                <ButtonLink href={site.phoneHref} variant="ink">
+                  Contact us
+                </ButtonLink>
+              </nav>
+            </div>
+          </details>
+        </div>
+      </div>
+    </header>
+  );
+}
