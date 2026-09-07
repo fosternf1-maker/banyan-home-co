@@ -1,3 +1,4 @@
+import { AreaMap } from "@/components/area-map";
 import { SectionHeader } from "@/components/section-header";
 import { neighborhoods, site, vettingItems } from "@/lib/site";
 
@@ -28,16 +29,23 @@ export function StandardAndArea() {
             We would rather be excellent across a few neighbourhoods than
             adequate across a metro.
           </p>
+          <AreaMap />
           <ul className="neighborhoods">
             {neighborhoods.map((name) => (
               <li key={name}>{name}</li>
             ))}
           </ul>
           <p className="fine-print">
-            If you are outside this area, email{" "}
+            If you are outside this area, use the{" "}
+            <a className="link-liquid" href={site.foundingHref}>
+              founding list
+            </a>{" "}
+            and say so — we expand by neighbourhood, not by advertisement. Or
+            write{" "}
             <a className="link-liquid" href={site.areaMailto}>
               {site.email}
-            </a>. We expand by neighbourhood, not by advertisement.
+            </a>
+            .
           </p>
         </div>
       </div>

@@ -1823,3 +1823,330 @@ td.featured {
     padding-top: 1.1rem;
   }
 }
+
+/* ============================================================
+   PROOF OF PLACE — founder letter, audit specimen, area map
+   The page has no photography, so the visual interruptions are
+   made of the business's own material: a signed letter, the
+   document a member actually receives, and a drawn map of a
+   deliberately small radius.
+   ============================================================ */
+
+.founder {
+  background: var(--color-surface);
+  border-block: 1px solid var(--color-line-soft);
+}
+
+.founder__grid {
+  display: grid;
+  gap: clamp(2rem, 4vw, 3.5rem);
+}
+
+@media (min-width: 880px) {
+  .founder__grid {
+    grid-template-columns: minmax(0, 15rem) minmax(0, 1fr);
+    align-items: start;
+  }
+}
+
+.founder__mark {
+  margin: 1.25rem 0 0.9rem;
+  width: 3.75rem;
+  height: 3.75rem;
+  display: grid;
+  place-items: center;
+  font-family: var(--font-serif);
+  font-size: var(--step-1);
+  letter-spacing: 0.06em;
+  color: var(--color-canopy);
+  border: 1px solid var(--color-canopy);
+  border-radius: 50%;
+}
+
+.founder__name {
+  margin: 0;
+  font-family: var(--font-serif);
+  font-size: var(--step-1);
+  line-height: 1.2;
+}
+
+.founder__role {
+  margin: 0.2rem 0 0;
+  font-size: var(--step--1);
+  color: var(--color-ink-3);
+}
+
+.founder__letter h2 {
+  font-size: var(--step-3);
+  line-height: 1.06;
+  max-width: 16ch;
+  margin: 0 0 1.5rem;
+}
+
+.founder__letter p {
+  max-width: var(--measure);
+  margin: 0 0 1.15rem;
+  color: var(--color-ink-2);
+}
+
+.founder__sign {
+  font-family: var(--font-serif);
+  font-size: var(--step-1);
+  font-style: italic;
+  color: var(--color-ink);
+  margin-top: 1.9rem;
+}
+
+.founder__contact {
+  font-size: var(--step--1);
+  margin-top: 0.6rem;
+}
+
+/* --- the audit specimen ------------------------------------- */
+
+.sample {
+  background: var(--color-paper-2);
+}
+
+.audit {
+  margin: 0;
+  background: var(--color-surface);
+  border: 1px solid var(--color-line);
+  box-shadow: 0 1px 0 var(--color-line-soft), 0 18px 40px -32px rgb(20 33 28 / 0.5);
+}
+
+.audit__head {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: clamp(1.15rem, 2.5vw, 1.75rem);
+  border-bottom: 1px solid var(--color-ink);
+}
+
+.audit__title {
+  margin: 0;
+  font-family: var(--font-serif);
+  font-size: var(--step-2);
+  line-height: 1.1;
+}
+
+.audit__sub {
+  margin: 0.25rem 0 0;
+  font-size: var(--step--1);
+  color: var(--color-ink-3);
+}
+
+.audit__stamp {
+  margin: 0;
+  padding: 0.5em 0.9em;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-brass);
+  border: 1px solid color-mix(in srgb, var(--color-brass) 45%, transparent);
+}
+
+.audit__body {
+  padding: clamp(1.15rem, 2.5vw, 1.75rem);
+  display: grid;
+  gap: clamp(1.75rem, 3.5vw, 2.75rem);
+}
+
+.audit__h {
+  margin: 0 0 0.9rem;
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--color-ink-3);
+}
+
+.audit__block {
+  overflow-x: auto;
+}
+
+.audit__table {
+  width: 100%;
+  min-width: 34rem;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+}
+
+.audit__table th,
+.audit__table td {
+  text-align: left;
+  vertical-align: top;
+  padding: 0.7rem 0.9rem 0.7rem 0;
+  border-bottom: 1px solid var(--color-line-soft);
+}
+
+.audit__table thead th {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-ink-3);
+  border-bottom-color: var(--color-line);
+}
+
+.audit__table tbody th {
+  font-weight: 600;
+  padding-right: 1.5rem;
+}
+
+.audit__detail {
+  color: var(--color-ink-2);
+}
+
+.audit__next {
+  white-space: nowrap;
+  color: var(--color-ink-3);
+  font-size: 0.88rem;
+}
+
+.audit__status {
+  display: inline-block;
+  padding: 0.28em 0.7em;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.audit__status--good {
+  color: #26543f;
+  background: rgb(127 179 160 / 0.24);
+}
+
+.audit__status--monitor {
+  color: #6b4a12;
+  background: rgb(143 102 32 / 0.16);
+}
+
+.audit__status--act {
+  color: #7a2a1e;
+  background: rgb(140 47 34 / 0.14);
+}
+
+.audit__split {
+  display: grid;
+  gap: clamp(1.75rem, 3.5vw, 2.75rem);
+}
+
+@media (min-width: 780px) {
+  .audit__split {
+    grid-template-columns: 1.35fr 1fr;
+  }
+}
+
+.audit__punch {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.9rem;
+}
+
+.audit__punch li {
+  display: grid;
+  grid-template-columns: 1.6rem 1fr;
+  gap: 0.85rem;
+  align-items: start;
+  font-size: 0.95rem;
+}
+
+.audit__punch-no {
+  font-family: var(--font-serif);
+  font-size: var(--step-1);
+  line-height: 1;
+  color: var(--color-canopy);
+}
+
+.audit__why {
+  display: block;
+  margin-top: 0.2rem;
+  color: var(--color-ink-3);
+  font-size: 0.88rem;
+}
+
+.audit__cal {
+  margin: 0;
+  display: grid;
+  gap: 0;
+  border-top: 1px solid var(--color-line-soft);
+}
+
+.audit__cal > div {
+  display: grid;
+  grid-template-columns: 3.25rem 1fr;
+  gap: 1rem;
+  padding: 0.65rem 0;
+  border-bottom: 1px solid var(--color-line-soft);
+}
+
+.audit__cal dt {
+  font-family: var(--font-serif);
+  color: var(--color-brass);
+  font-size: 1.02rem;
+}
+
+.audit__cal dd {
+  margin: 0;
+  color: var(--color-ink-2);
+  font-size: 0.9rem;
+}
+
+/* --- the map ------------------------------------------------ */
+
+.areamap {
+  margin: 1.6rem 0 0;
+  background: var(--color-surface);
+  border: 1px solid var(--color-line);
+  max-width: 26rem;
+}
+
+.areamap svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.areamap__land {
+  fill: var(--color-paper-2);
+}
+
+.areamap__hood {
+  fill: color-mix(in srgb, var(--color-canopy) 18%, transparent);
+  stroke: var(--color-canopy);
+  stroke-width: 1;
+  transition: fill 0.25s var(--ease-lux);
+}
+
+.areamap__hood:hover {
+  fill: color-mix(in srgb, var(--color-canopy) 48%, transparent);
+}
+
+.areamap__water {
+  fill: var(--color-ink-3);
+  opacity: 0.55;
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
+.areamap__note {
+  fill: var(--color-ink-3);
+  opacity: 0.5;
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}

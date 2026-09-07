@@ -275,5 +275,81 @@ export const faqs = [
   },
 ] as const;
 
+/**
+ * Specimen content for the sample Home Health Audit. Deliberately not tied to
+ * a real address — it shows the format a member receives, nothing more. If
+ * these ever describe an actual house, the disclaimer on that section stops
+ * being true.
+ */
+export const auditSystems = [
+  {
+    system: "HVAC — air handler & condenser",
+    detail: "2019 unit, 3 ton. Coil clean, drain line clear.",
+    status: "Good" as const,
+    due: "Filter service Nov",
+  },
+  {
+    system: "Water heater",
+    detail: "2016 gas, 50 gal. No flush on record. Anode not inspected.",
+    status: "Act" as const,
+    due: "Flush & inspect",
+  },
+  {
+    system: "Roof & openings",
+    detail: "Architectural shingle, 2020. Two lifted tabs, south slope.",
+    status: "Monitor" as const,
+    due: "Pre-season May",
+  },
+  {
+    system: "Dryer vent",
+    detail: "Rigid duct, 14ft run to soffit. Lint accumulation at elbow.",
+    status: "Act" as const,
+    due: "Clean",
+  },
+  {
+    system: "Electrical panel",
+    detail: "200A, 2018. Labelled, no double-taps, AFCI on bedroom circuits.",
+    status: "Good" as const,
+    due: "\u2014",
+  },
+  {
+    system: "Irrigation",
+    detail: "Six zones. Zone 3 head misaligned, spraying the drive.",
+    status: "Monitor" as const,
+    due: "Zone check",
+  },
+  {
+    system: "Drainage & grading",
+    detail: "Positive fall on three elevations. North bed holds water.",
+    status: "Monitor" as const,
+    due: "Pre-season May",
+  },
+];
+
+export const auditPunchList = [
+  {
+    priority: "1",
+    item: "Flush water heater and inspect anode rod",
+    why: "Nine years without a flush. Sediment is what ends these early.",
+  },
+  {
+    priority: "2",
+    item: "Clean dryer vent run",
+    why: "Lint at the elbow on a 14ft run. This is the fire one.",
+  },
+  {
+    priority: "3",
+    item: "Reseat two lifted shingle tabs, south slope",
+    why: "Cheap in May. Not cheap after the first September band.",
+  },
+];
+
+export const auditCalendar = [
+  { month: "May", work: "Pre-season roof, openings, drainage and tree line" },
+  { month: "Jun", work: "HVAC filter service \u00b7 irrigation zone check" },
+  { month: "Sep", work: "Mitigation trades introduced before October" },
+  { month: "Nov", work: "HVAC filter service \u00b7 water heater flush" },
+];
+
 export const legalDisclaimer =
   "Banyan Home Co. is a home management and coordination service. It is not an insurer, and it does not pay for repair or replacement of any home system, appliance, or component. Independent licensed trades perform the work. Banyan pays those trades as the member's disclosed agent within five business days of an approved invoice, never marks up third-party repairs, and takes no compensation from any vendor.";
