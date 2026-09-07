@@ -26,6 +26,7 @@ export const site = {
   phoneDisplay: "(813) 330-0480",
   phoneHref: `tel:${TELEPHONE}`,
   auditMailto: `mailto:${EMAIL}?subject=Banyan%20Home%20Co.`,
+  foundingHref: "/#founding-list",
   vendorMailto: `mailto:${EMAIL}?subject=Trade%20network`,
   areaMailto: `mailto:${EMAIL}`,
   keywords: [
@@ -36,6 +37,12 @@ export const site = {
     ...neighborhoods,
   ],
 } as const;
+
+/** The tier query lands in `location.search`, so it has to precede the hash —
+ *  `/#founding-list?tier=x` would bury it inside the fragment instead. */
+export function foundingHrefForTier(tier: string) {
+  return `/?tier=${tier}#founding-list`;
+}
 
 export const navLinks = [
   { href: "/#how-it-works", label: "How it works" },
