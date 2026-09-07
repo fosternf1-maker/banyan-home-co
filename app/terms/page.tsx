@@ -5,6 +5,8 @@ import { site } from "@/lib/site";
 export const metadata: Metadata = {
   title: "Terms",
   description: `${site.name} is pre-launch. Visiting this site does not create a membership or any other contract.`,
+  alternates: { canonical: "/terms" },
+  openGraph: { url: "/terms" },
 };
 
 export default function TermsPage() {

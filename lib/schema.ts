@@ -1,4 +1,5 @@
 import { faqs, neighborhoods, site, year1Zips } from "@/lib/site";
+import { absoluteUrl } from "@/lib/hosts";
 
 export function localBusinessJsonLd() {
   return {
@@ -6,10 +7,23 @@ export function localBusinessJsonLd() {
     "@type": "LocalBusiness",
     name: site.name,
     url: site.url,
+    image: [absoluteUrl("/opengraph-image"), absoluteUrl("/icon.svg")],
+    logo: absoluteUrl("/icon.svg"),
     email: site.email,
     telephone: site.telephone,
     description: site.description,
+    priceRange: "$149–$499/mo (planned; not a live offer)",
     areaServed: [
+      {
+        "@type": "City" as const,
+        name: "Tampa",
+        containedInPlace: {
+          "@type": "State" as const,
+          name: "Florida",
+        },
+      },
+      { "@type": "Place" as const, name: "Tampa, FL" },
+      { "@type": "Place" as const, name: "South Tampa, FL" },
       ...neighborhoods.map((name) => ({
         "@type": "Place" as const,
         name: `${name}, Tampa, FL`,
@@ -18,7 +32,6 @@ export function localBusinessJsonLd() {
         "@type": "Place" as const,
         name: `Tampa, FL ${postalCode}`,
       })),
-      { "@type": "Place" as const, name: "South Tampa, FL" },
     ],
   };
 }

@@ -1,3 +1,5 @@
+import { siteOrigin } from "@/lib/hosts";
+
 const EMAIL = "hello@banyanhomeco.com";
 const TELEPHONE = "+18133300480";
 
@@ -20,7 +22,7 @@ export const site = {
   documentTitle: "Banyan Home Co. · South Tampa home management",
   description:
     "Banyan Home Co. is a private home management membership for South Tampa, opening mid-January 2027. One number, independent licensed trades introduced as your disclosed agent, and a Home Manager at the house if you want one.",
-  url: "https://banyan-home-co.vercel.app",
+  url: siteOrigin,
   email: EMAIL,
   telephone: TELEPHONE,
   phoneDisplay: "(813) 330-0480",
