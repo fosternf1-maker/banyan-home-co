@@ -1,4 +1,5 @@
 import { Faq } from "@/components/faq";
+import { FoundingListSection } from "@/components/founding-list-section";
 import { FinalCta } from "@/components/final-cta";
 import { Hero } from "@/components/hero";
 import { HowItWorks } from "@/components/how-it-works";
@@ -16,6 +17,7 @@ export default function Home() {
         <Hero />
         <WhyExists />
         <HowItWorks />
+        <FoundingListSection />
         <Membership />
         <ScheduledAndCoast />
         <PromiseBand />
