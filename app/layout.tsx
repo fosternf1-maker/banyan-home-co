@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Newsreader, Source_Sans_3 } from "next/font/google";
+import { Analytics } from "@/components/analytics";
 import { JsonLd } from "@/components/json-ld";
 import { PageMotion } from "@/components/page-motion";
 import { SiteNav } from "@/components/site-nav";
@@ -53,7 +54,7 @@ export const viewport: Viewport = {
   themeColor: "#0E1714",
   width: "device-width",
   initialScale: 1,
-  colorScheme: "light",
+  colorScheme: "dark",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
@@ -70,6 +71,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <PageMotion />
         <SiteNav />
         {children}
+        <Analytics />
       </body>
     </html>
   );

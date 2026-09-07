@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
+import { track } from "@/lib/analytics";
 
 function prefersReducedMotion() {
   return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -82,18 +83,43 @@ export function PageMotion() {
 
     function onClick(event: MouseEvent) {
       const link = (event.target as HTMLElement | null)?.closest<HTMLAnchorElement>(
-        'a[href^="#"]',
+        "a[href]",
       );
       if (!link) return;
 
       const href = link.getAttribute("href");
-      if (!href || href.length < 2) return;
+      if (!href) return;
 
-      const target = document.getElementById(href.slice(1));
+      /* The phone and the inbox stay as backup paths, so it is worth knowing
+         when someone reaches for them instead of the form. */
+      if (href.startsWith("tel:")) track("Click to call");
+      if (href.startsWith("mailto:")) track("Click to email");
+
+      /* Smooth-scroll only links that stay on this exact page. A CTA like
+         /?tier=signature#founding-list has to navigate for real — the query
+         is what carries the tier, and intercepting it would strand that in
+         the fragment where location.search never sees it. */
+      let url: URL;
+      try {
+        url = new URL(link.href, window.location.href);
+      } catch {
+        return;
+      }
+
+      if (
+        url.origin !== window.location.origin ||
+        url.pathname !== window.location.pathname ||
+        url.search !== window.location.search ||
+        url.hash.length < 2
+      ) {
+        return;
+      }
+
+      const target = document.getElementById(url.hash.slice(1));
       if (!target) return;
 
       event.preventDefault();
-      history.pushState(null, "", href);
+      history.pushState(null, "", url.hash);
       scrollToElement(target);
       markArrived(target);
     }

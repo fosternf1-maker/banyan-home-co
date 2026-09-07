@@ -12,8 +12,9 @@ export default function TermsPage() {
     <LegalPage title="Terms">
       <p>
         This website is information about a planned South Tampa home-management
-        membership. It is not an offer to sell, and visiting it does not create
-        a contract.
+        membership. It is not an offer to sell. Neither visiting it, joining
+        the founding list, nor sending the trade form creates a contract,
+        reserves a membership, or places anyone on a roster.
       </p>
       <h2>No membership yet</h2>
       <p>
@@ -25,6 +26,19 @@ export default function TermsPage() {
         Cancellation, refund, and attendance notes on the homepage are planned
         terms for when membership is actually for sale. They are not in force
         today. There is no member agreement yet.
+      </p>
+      <h2>The founding list and the trade form</h2>
+      <p>
+        The founding list records who would like to hear from us when
+        membership opens in mid-January 2027. It is not a queue position, not a
+        reservation, and not a price lock. The trade form is an expression of
+        interest in a vendor network that does not exist yet; no vendors are
+        signed and no roster has been built. How either set of details is
+        handled is set out in our{" "}
+        <a className="link-liquid" href="/privacy">
+          privacy page
+        </a>
+        .
       </p>
       <h2>What Banyan is not</h2>
       <p>
