@@ -1,4 +1,42 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "alias": ["banyanhomeco.com", "www.banyanhomeco.com"]
+  "alias": ["banyanhomeco.com", "www.banyanhomeco.com"],
+  "redirects": [
+    {
+      "source": "/",
+      "has": [{ "type": "host", "value": "banyanhomeco.com" }],
+      "destination": "https://www.banyanhomeco.com/",
+      "statusCode": 301
+    },
+    {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "banyanhomeco.com" }],
+      "destination": "https://www.banyanhomeco.com/:path*",
+      "statusCode": 301
+    },
+    {
+      "source": "/",
+      "has": [{ "type": "host", "value": "banyan-home-co.vercel.app" }],
+      "destination": "https://www.banyanhomeco.com/",
+      "statusCode": 301
+    },
+    {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "banyan-home-co.vercel.app" }],
+      "destination": "https://www.banyanhomeco.com/:path*",
+      "statusCode": 301
+    }
+  ],
+  "headers": [
+    {
+      "source": "/",
+      "has": [{ "type": "host", "value": "(.*)\\.vercel\\.app" }],
+      "headers": [{ "key": "X-Robots-Tag", "value": "noindex, nofollow" }]
+    },
+    {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "(.*)\\.vercel\\.app" }],
+      "headers": [{ "key": "X-Robots-Tag", "value": "noindex, nofollow" }]
+    }
+  ]
 }

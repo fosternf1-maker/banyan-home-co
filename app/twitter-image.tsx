@@ -9,6 +9,6 @@ export const alt = ogAlt;
 export const size = ogSize;
 export const contentType = ogContentType;
 
-export default function OpenGraphImage() {
+export default function TwitterImage() {
   return createOgImage();
 }

@@ -1,12 +1,23 @@
 import type { MetadataRoute } from "next";
-import { site } from "@/lib/site";
+import { headers } from "next/headers";
+import { isVercelAppHost, siteOrigin } from "@/lib/hosts";
 
-export default function robots(): MetadataRoute.Robots {
+export default async function robots(): Promise<MetadataRoute.Robots> {
+  if (isVercelAppHost((await headers()).get("host"))) {
+    return {
+      rules: {
+        userAgent: "*",
+        disallow: "/",
+      },
+    };
+  }
+
   return {
     rules: {
       userAgent: "*",
       allow: "/",
     },
-    sitemap: `${site.url}/sitemap.xml`,
+    sitemap: `${siteOrigin}/sitemap.xml`,
+    host: siteOrigin,
   };
 }

@@ -5,6 +5,8 @@ import { site } from "@/lib/site";
 export const metadata: Metadata = {
   title: "Privacy",
   description: `${site.name} is pre-launch. This page is how we treat a message you send, not a live membership product.`,
+  alternates: { canonical: "/privacy" },
+  openGraph: { url: "/privacy" },
 };
 
 export default function PrivacyPage() {

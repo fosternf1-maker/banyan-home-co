@@ -34,7 +34,7 @@
   --step-3: clamp(2.05rem, 1.55rem + 2.1vw, 3.35rem);
   --step-4: clamp(2.7rem, 1.7rem + 4vw, 5.35rem);
   --ease-lux: cubic-bezier(0.22, 1, 0.36, 1);
-  color-scheme: light;
+  color-scheme: dark;
 }
 
 * {
