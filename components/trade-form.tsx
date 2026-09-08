@@ -3,6 +3,7 @@
 import { useActionState, useEffect, useRef } from "react";
 import { applyAsTrade } from "@/app/actions";
 import { Field } from "@/components/forms/field";
+import { track } from "@/lib/analytics";
 import { idleState } from "@/lib/forms/schema";
 import { site } from "@/lib/site";
 
@@ -20,6 +21,12 @@ export function TradeForm() {
   }, []);
   useEffect(() => {
     if (state.status === "error") summary.current?.focus();
+    if (state.status === "sent" || state.status === "sent-unconfigured") {
+      track("Trade form submit", {
+        delivered: state.status === "sent",
+        ...(state.status === "sent" ? { area: state.area } : {}),
+      });
+    }
   }, [state]);
 
   const errors = state.status === "error" ? state.errors : {};

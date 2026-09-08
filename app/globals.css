@@ -2150,3 +2150,11 @@ td.featured {
   letter-spacing: 0.18em;
   text-transform: uppercase;
 }
+
+.not-found__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.85rem 1rem;
+  justify-content: center;
+  margin-top: 1.9rem;
+}
