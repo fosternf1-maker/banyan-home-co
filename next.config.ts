@@ -10,29 +10,29 @@ const securityHeaders = [
 ];
 
 /**
- * Vercel's CDN puts `Access-Control-Allow-Origin: *` on prerendered responses.
- * proxy.ts tried to delete it and could not — the header is added downstream of
- * the app, so there is nothing there to delete. Setting it explicitly here does
- * work, because Next's own headers() reaches the response.
+ * `Access-Control-Allow-Origin: *` on the HTML documents cannot be changed from
+ * here. Two approaches were tried against production and both failed:
  *
- * Scoped to the four HTML documents rather than `/:path*`. A blanket rule would
- * also cover /_next/static, where the permissive value is deliberate and is
- * what lets fonts and chunks load from a preview or CDN origin.
+ *   1. proxy.ts calling headers.delete() — the header is added downstream of
+ *      the app, so there is nothing present to delete.
+ *   2. Setting it explicitly in this headers() block — the other headers in
+ *      `securityHeaders` do reach the response from here, so headers() runs;
+ *      Vercel's CDN simply wins for this particular header on prerendered
+ *      responses.
+ *
+ * The remaining lever is making the routes dynamic, which trades away static
+ * prerendering for every visitor to tidy one header on a public brochure whose
+ * content is already public. Not worth it. Left as-is deliberately; if it ever
+ * needs to change it is a Vercel support question, not an app change.
  */
-const documentRoutes = ["/", "/trades", "/privacy", "/terms"];
-
-const documentCors = {
-  key: "Access-Control-Allow-Origin",
-  value: "https://www.banyanhomeco.com",
-};
 
 const nextConfig: NextConfig = {
   async headers() {
     return [
-      ...documentRoutes.map((source) => ({
-        source,
-        headers: [...securityHeaders, documentCors],
-      })),
+      {
+        source: "/",
+        headers: securityHeaders,
+      },
       {
         source: "/:path*",
         headers: securityHeaders,
