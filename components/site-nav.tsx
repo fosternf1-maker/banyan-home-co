@@ -66,11 +66,11 @@ export function SiteNav() {
         </nav>
         <div className="site-nav__end">
           <ButtonLink
-            href={site.phoneHref}
+            href={site.foundingHref}
             variant={tone === "dark" ? "primary" : "ink"}
             className="site-nav__cta"
           >
-            Contact us
+            Join the list
           </ButtonLink>
           <details
             ref={detailsRef}
@@ -90,10 +90,18 @@ export function SiteNav() {
                     {link.label}
                   </a>
                 ))}
-                <ButtonLink href={site.phoneHref} variant="ink">
-                  Contact us
+                <ButtonLink href={site.foundingHref} variant="ink">
+                  Join the founding list
                 </ButtonLink>
               </nav>
+              <div className="site-nav__drawer-foot">
+                <a href={site.phoneHref} onClick={closeMenu}>
+                  {site.phoneDisplay}
+                </a>
+                <a href={`mailto:${site.email}`} onClick={closeMenu}>
+                  {site.email}
+                </a>
+              </div>
             </div>
           </details>
         </div>

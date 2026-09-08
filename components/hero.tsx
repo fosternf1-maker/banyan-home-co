@@ -1,5 +1,5 @@
 import { ButtonLink } from "@/components/button-link";
-import { Wordmark } from "@/components/wordmark";
+import { BanyanLivingMark } from "@/components/banyan-living-mark";
 import { site } from "@/lib/site";
 
 const roots = [
@@ -31,7 +31,7 @@ export function Hero() {
         ))}
       </div>
       <div className="wrap hero__inner">
-        <Wordmark size="lg" mark="living" href="#top" />
+        <BanyanLivingMark className="hero__mark" />
         <h1>
           Owning the house was supposed to be the <em>reward.</em>
         </h1>
@@ -42,8 +42,8 @@ export function Hero() {
           Manager at the house when they arrive — if you want us there.
         </p>
         <div className="hero__actions">
-          <ButtonLink href={site.phoneHref} variant="primary">
-            Contact us
+          <ButtonLink href={site.foundingHref} variant="primary">
+            Join the founding list
           </ButtonLink>
           <ButtonLink href="/#membership" variant="ghost">
             See planned membership

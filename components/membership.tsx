@@ -1,5 +1,5 @@
 import { SectionHeader } from "@/components/section-header";
-import { membershipRows, tiers } from "@/lib/site";
+import { foundingHrefForTier, membershipRows, tiers } from "@/lib/site";
 
 function Cell({ value }: { value: string }) {
   if (value === "yes") {
@@ -59,6 +59,9 @@ export function Membership() {
                     <span className="tier-price">
                       <b>{tier.price}</b> / mo
                     </span>
+                    <a className="tier-ask" href={foundingHrefForTier(tier.id)}>
+                      Ask about this tier
+                    </a>
                   </th>
                 ))}
               </tr>
@@ -109,6 +112,9 @@ export function Membership() {
                   </div>
                 ))}
               </dl>
+              <a className="tier-ask" href={foundingHrefForTier(tier.id)}>
+                Ask about {tier.name}
+              </a>
             </article>
           ))}
         </div>
