@@ -24,7 +24,7 @@ export function SiteFooter() {
           <div>
             <strong>Membership</strong>
             <Link href="/#membership">Tiers &amp; pricing</Link>
-            <a href={site.vendorMailto}>Write about the trade network</a>
+            <a href="/trades">For licensed trades</a>
             <Link href="/privacy">Privacy</Link>
             <Link href="/terms">Terms</Link>
           </div>
