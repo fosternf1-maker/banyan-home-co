@@ -39,3 +39,9 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Reference images saved from search results — low-resolution, unlicensed, and
+# at least two carry a listing service's watermark. Kept locally as a shot list
+# reference; must never reach this repo, which is public.
+public/images.jpg
+public/images-*.jpg
