@@ -27,11 +27,11 @@ export default function Home() {
         <HowItWorks />
         <SampleAudit />
         <FoundingListSection />
-        <Membership />
-        <ScheduledAndCoast />
         <Founder />
         <PromiseBand />
         <StandardAndArea />
+        <Membership />
+        <ScheduledAndCoast />
         <Faq />
         <FinalCta />
       </main>
