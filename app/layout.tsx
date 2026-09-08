@@ -33,7 +33,6 @@ export const metadata: Metadata = {
   openGraph: {
     title: site.documentTitle,
     description: site.description,
-    url: "/",
     siteName: site.name,
     locale: "en_US",
     type: "website",
@@ -53,7 +52,7 @@ export const viewport: Viewport = {
   themeColor: "#0E1714",
   width: "device-width",
   initialScale: 1,
-  colorScheme: "light",
+  colorScheme: "dark",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
