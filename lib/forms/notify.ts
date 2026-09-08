@@ -11,10 +11,25 @@ function inboxAddress() {
   return process.env.WAITLIST_TO || site.email;
 }
 
-/** The from-address must sit on a Resend-verified domain, so it is derived from
- *  the site's own address rather than an env var someone can typo. */
+/**
+ * Resend will send from its own shared sender the moment you have an API key,
+ * with no DNS at all. That is fine for a notification landing in our own
+ * inbox, so the forms can go live before the domain is verified.
+ *
+ * It is NOT fine for the acknowledgement a prospective member receives — a
+ * launch email from `onboarding@resend.dev` reads as spam and spends the
+ * credibility the rest of the site is built on. So the member email only
+ * sends once RESEND_FROM is set to an address on our own verified domain.
+ */
+const SHARED_SENDER = "onboarding@resend.dev";
+
 function fromAddress() {
-  return `${site.name} <${site.email}>`;
+  return process.env.RESEND_FROM || `${site.name} <${SHARED_SENDER}>`;
+}
+
+export function ownDomainVerified() {
+  const from = process.env.RESEND_FROM;
+  return !!from && !from.includes(SHARED_SENDER);
 }
 
 async function send(payload: Record<string, unknown>) {
@@ -69,6 +84,8 @@ export async function notifyWaitlist(entry: WaitlistSubmission) {
 /** Best-effort acknowledgement. A failure here must not tell the member their
  *  submission was lost — it wasn't; the inbox copy already went. */
 export async function confirmToMember(entry: WaitlistSubmission) {
+  if (!ownDomainVerified()) return;
+
   const opening =
     entry.area === "year-one"
       ? "You're on the founding list. We open mid-January 2027, and we will write before anyone can buy a membership."
