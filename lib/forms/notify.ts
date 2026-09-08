@@ -32,7 +32,7 @@ export function ownDomainVerified() {
   return !!from && !from.includes(SHARED_SENDER);
 }
 
-async function send(payload: Record<string, unknown>) {
+async function post(payload: Record<string, unknown>) {
   const response = await fetch(ENDPOINT, {
     method: "POST",
     headers: {
@@ -46,6 +46,36 @@ async function send(payload: Record<string, unknown>) {
     throw new Error(
       `Resend responded ${response.status}: ${await response.text()}`,
     );
+  }
+}
+
+/**
+ * Before a domain is verified, Resend's shared sender will only deliver to the
+ * address that owns the Resend account — anything else comes back 403. It
+ * names the permitted address in that error, so rather than dropping a real
+ * enquiry we retry once to the address Resend just told us it will accept.
+ *
+ * This bridge exists so the founding list works on day one with nothing but an
+ * API key. It goes dead the moment RESEND_FROM points at a verified domain,
+ * because the 403 stops happening.
+ */
+const OWNER_ONLY = /your own email address \(([^)]+)\)/;
+
+async function send(payload: Record<string, unknown>) {
+  try {
+    await post(payload);
+  } catch (error) {
+    if (ownDomainVerified()) throw error;
+
+    const permitted = OWNER_ONLY.exec(String(error))?.[1];
+    if (!permitted) throw error;
+
+    console.warn(
+      "[resend] unverified domain — redirecting notification to %s. " +
+        "Verify banyanhomeco.com and set RESEND_FROM to stop this.",
+      permitted,
+    );
+    await post({ ...payload, to: [permitted] });
   }
 }
 
