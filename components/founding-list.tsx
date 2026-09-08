@@ -1,6 +1,6 @@
 "use client";
 
-import { useActionState, useEffect, useRef, useState } from "react";
+import { useActionState, useEffect, useRef } from "react";
 import { joinFoundingList } from "@/app/actions";
 import { Field } from "@/components/forms/field";
 import {
@@ -31,16 +31,19 @@ export function FoundingList() {
     joinFoundingList,
     idleState,
   );
-  const [renderedAt, setRenderedAt] = useState(0);
-  const [tier, setTier] = useState("");
   const summary = useRef<HTMLDivElement>(null);
+  const stamp = useRef<HTMLInputElement>(null);
+  const tier = useRef<HTMLInputElement>(null);
 
+  /* Both are write-once values for hidden fields nobody looks at, so they are
+     set on the DOM node directly. Through state, filling two inputs nothing
+     reads would re-render the entire form. */
   useEffect(() => {
-    setRenderedAt(Date.now());
-    // Pricing cards deep-link as /#founding-list?tier=signature so the enquiry
-    // arrives knowing which tier prompted it.
+    if (stamp.current) stamp.current.value = String(Date.now());
+    // Pricing cards deep-link as /?tier=signature#founding-list — query before
+    // hash, or the tier lands in the fragment where search never sees it.
     const asked = new URLSearchParams(window.location.search).get("tier");
-    if (asked) setTier(asked);
+    if (asked && tier.current) tier.current.value = asked;
   }, []);
 
   useEffect(() => {
@@ -189,8 +192,8 @@ export function FoundingList() {
           autoComplete="off"
         />
       </p>
-      <input type="hidden" name="rendered_at" value={renderedAt || ""} />
-      <input type="hidden" name="tier" value={tier} />
+      <input type="hidden" name="rendered_at" ref={stamp} defaultValue="" />
+      <input type="hidden" name="tier" ref={tier} defaultValue="" />
 
       <div className="form__foot">
         <button className="btn btn--ink" type="submit" disabled={pending}>

@@ -1,6 +1,6 @@
 "use client";
 
-import { useActionState, useEffect, useRef, useState } from "react";
+import { useActionState, useEffect, useRef } from "react";
 import { applyAsTrade } from "@/app/actions";
 import { Field } from "@/components/forms/field";
 import { idleState } from "@/lib/forms/schema";
@@ -10,10 +10,14 @@ const YES_NO = ["Yes", "No"] as const;
 
 export function TradeForm() {
   const [state, formAction, pending] = useActionState(applyAsTrade, idleState);
-  const [renderedAt, setRenderedAt] = useState(0);
   const summary = useRef<HTMLDivElement>(null);
+  const stamp = useRef<HTMLInputElement>(null);
 
-  useEffect(() => setRenderedAt(Date.now()), []);
+  /* Write-once value for a field nobody looks at — set on the node rather
+     than re-rendering the form through state to fill one hidden input. */
+  useEffect(() => {
+    if (stamp.current) stamp.current.value = String(Date.now());
+  }, []);
   useEffect(() => {
     if (state.status === "error") summary.current?.focus();
   }, [state]);
@@ -158,7 +162,7 @@ export function TradeForm() {
           autoComplete="off"
         />
       </p>
-      <input type="hidden" name="rendered_at" value={renderedAt || ""} />
+      <input type="hidden" name="rendered_at" ref={stamp} defaultValue="" />
 
       <div className="form__foot">
         <button className="btn btn--ink" type="submit" disabled={pending}>
