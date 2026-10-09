@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Faq } from "@/components/faq";
+import { JsonLdScript } from "@/components/json-ld";
 import { FinalCta } from "@/components/final-cta";
 import { Founder } from "@/components/founder";
 import { FoundingListSection } from "@/components/founding-list-section";
@@ -12,6 +13,7 @@ import { ScheduledAndCoast } from "@/components/scheduled-and-coast";
 import { SiteFooter } from "@/components/site-footer";
 import { StandardAndArea } from "@/components/standard-and-area";
 import { WhyExists } from "@/components/why-exists";
+import { faqPageJsonLd } from "@/lib/schema";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/" },
@@ -21,6 +23,7 @@ export const metadata: Metadata = {
 export default function Home() {
   return (
     <>
+      <JsonLdScript data={faqPageJsonLd()} />
       <main id="content">
         <Hero />
         <WhyExists />

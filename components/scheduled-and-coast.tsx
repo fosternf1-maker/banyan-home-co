@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { SectionHeader } from "@/components/section-header";
 import { coastItems, scheduledServices } from "@/lib/site";
 
@@ -14,11 +15,27 @@ export function ScheduledAndCoast() {
           <ul className="services">
             {scheduledServices.map((service) => (
               <li key={service.name}>
-                <span>{service.name}</span>
+                <span>
+                  {service.name === "Hurricane pre-season readiness" ? (
+                    <Link className="link-liquid" href="/hurricane">
+                      {service.name}
+                    </Link>
+                  ) : (
+                    service.name
+                  )}
+                </span>
                 <span>{service.price}</span>
               </li>
             ))}
           </ul>
+          <p className="fine-print">
+            The public guide for the season — zones, a 72-hour plan, and
+            printable lists — is{" "}
+            <Link className="link-liquid" href="/hurricane">
+              Tampa Bay hurricane prep
+            </Link>
+            .
+          </p>
         </div>
         <div id="coast">
           <SectionHeader
@@ -36,6 +53,15 @@ export function ScheduledAndCoast() {
               <li key={item}>{item}</li>
             ))}
           </ul>
+          <p className="fine-print">
+            County zone maps, supply lists, and what to do before you leave are
+            in the{" "}
+            <Link className="link-liquid" href="/hurricane">
+              hurricane prep guide
+            </Link>
+            . Membership readiness is a scheduled look at the house. It is not
+            coverage.
+          </p>
         </div>
       </div>
     </section>
