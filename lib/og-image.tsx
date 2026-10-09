@@ -5,7 +5,19 @@ export const ogAlt = `${site.name} — South Tampa home management, opening 2027
 export const ogSize = { width: 1200, height: 630 };
 export const ogContentType = "image/png";
 
-export function createOgImage() {
+type OgImageCopy = {
+  kicker?: string;
+  title?: string;
+  subtitle?: string;
+};
+
+export function createOgImage(copy: OgImageCopy = {}) {
+  const kicker = copy.kicker ?? "Banyan Home Co.";
+  const title = copy.title ?? "Owning the house was supposed to be the reward.";
+  const subtitle =
+    copy.subtitle ?? "Private membership for South Tampa. Opening mid-January 2027.";
+  const titleSize = title.length > 42 ? 54 : 72;
+
   return new ImageResponse(
     (
       <div
@@ -25,36 +37,35 @@ export function createOgImage() {
         <div
           style={{
             display: "flex",
-            flexDirection: "column",
             letterSpacing: "0.28em",
             textTransform: "uppercase",
             fontSize: 22,
             color: "#7FB3A0",
           }}
         >
-          Banyan Home Co.
+          {kicker}
         </div>
         <div style={{ display: "flex", flexDirection: "column", gap: 28 }}>
           <div
             style={{
-              fontSize: 72,
-              lineHeight: 1.05,
-              maxWidth: 900,
+              fontSize: titleSize,
+              lineHeight: 1.08,
+              maxWidth: 980,
               letterSpacing: "-0.03em",
               fontFamily: "Georgia, 'Times New Roman', serif",
             }}
           >
-            Owning the house was supposed to be the reward.
+            {title}
           </div>
           <div
             style={{
               fontSize: 28,
               color: "#A9BCB2",
-              maxWidth: 760,
+              maxWidth: 860,
               lineHeight: 1.4,
             }}
           >
-            Private membership for South Tampa. Opening mid-January 2027.
+            {subtitle}
           </div>
         </div>
       </div>

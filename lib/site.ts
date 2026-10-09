@@ -49,6 +49,7 @@ export function foundingHrefForTier(tier: string) {
 export const navLinks = [
   { href: "/#how-it-works", label: "How it works" },
   { href: "/#membership", label: "Membership" },
+  { href: "/hurricane", label: "Hurricane" },
   { href: "/#questions", label: "Questions" },
 ] as const;
 
