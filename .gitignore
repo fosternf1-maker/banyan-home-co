@@ -16,6 +16,10 @@
 # next.js
 /.next/
 /out/
+apps/field/.next/
+
+# The field app is its own package.
+apps/field/node_modules/
 
 # production
 /build

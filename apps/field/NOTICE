@@ -1,0 +1,21 @@
+Banyan field record
+===================
+
+The dispatch board, member visits, checklists, and per-home equipment history
+in this directory are adapted from OpenFieldService:
+
+  https://github.com/clawnify/OpenFieldService
+
+Copyright (c) 2026 Clawnify
+
+Licensed under the MIT License. The license text is in LICENSE in this
+directory. That license covers this field app, including the calendar-day
+helpers adapted from OpenFieldService src/client/calendar.ts and the visit,
+checklist, and equipment record modeled on its jobs, job checklists, and
+assets.
+
+The public Banyan marketing site at the repository root is a separate package
+and is not part of that upstream project.
+
+This directory is a port onto Banyan's Next.js app, not a vendored copy of the
+upstream Preact, Hono, and Cloudflare D1 application. See README.md.

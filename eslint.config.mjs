@@ -12,6 +12,8 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Separate Next app. It has its own eslint config.
+    "apps/field/**",
   ]),
 ]);
 
