@@ -1,4 +1,4 @@
-import { neighborhoods, year1Zips } from "@/lib/site";
+import { neighborhoods, tierInterestOptions, year1Zips } from "@/lib/site";
 
 export type FieldErrors = Record<string, string>;
 
@@ -15,7 +15,7 @@ export const idleState: FormState = { status: "idle" };
 /**
  * Year-one ZIPs are the four South Tampa codes. Everything else in Hillsborough
  * and Pinellas (335xx / 336xx) is somewhere we might plausibly reach by
- * expanding a neighbourhood at a time, so those names are worth keeping.
+ * expanding a neighborhood at a time, so those names are worth keeping.
  * Anything further away gets told the truth rather than a soft maybe.
  */
 export function classifyZip(zip: string): AreaVerdict {
@@ -75,8 +75,7 @@ export function parseWaitlist(
 
   const mobileRaw = text(data, "mobile");
   const mobile = digitsOnly(mobileRaw);
-  if (!mobile) errors.mobile = "We need a mobile number for the launch text.";
-  else if (mobile.length < 10 || mobile.length > 11)
+  if (mobileRaw && (mobile.length < 10 || mobile.length > 11))
     errors.mobile = "Enter a 10-digit US mobile number.";
 
   const zip = text(data, "zip");
@@ -86,7 +85,7 @@ export function parseWaitlist(
   const neighborhood = text(data, "neighborhood");
   const allowedHoods: string[] = [...neighborhoods, "Other", ""];
   if (!allowedHoods.includes(neighborhood))
-    errors.neighborhood = "Choose one of the listed neighbourhoods.";
+    errors.neighborhood = "Choose one of the listed neighborhoods.";
 
   const homeType = text(data, "homeType");
   if (homeType && !(homeTypes as readonly string[]).includes(homeType))
@@ -98,6 +97,13 @@ export function parseWaitlist(
 
   const note = text(data, "note");
   if (note.length > 300) errors.note = "Please keep this under 300 characters.";
+
+  const tier = text(data, "tier");
+  const allowedTiers = new Set<string>(
+    tierInterestOptions.map((option) => option.value),
+  );
+  if (tier && !allowedTiers.has(tier))
+    errors.tier = "Choose one of the listed tiers.";
 
   if (Object.keys(errors).length > 0) return { ok: false, errors };
 
@@ -112,7 +118,7 @@ export function parseWaitlist(
       homeType,
       note,
       contactRole,
-      tier: text(data, "tier"),
+      tier,
       area: classifyZip(zip),
     },
   };
@@ -141,7 +147,7 @@ export function parseTrade(
   if (!company) errors.company = "Please give us the company name.";
 
   const license = text(data, "license");
-  if (!license) errors.license = "We verify every licence through DBPR before we call.";
+  if (!license) errors.license = "We verify every license through DBPR before we call.";
 
   const trades = text(data, "trades");
   if (!trades) errors.trades = "Tell us what you do.";
