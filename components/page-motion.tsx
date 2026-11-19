@@ -95,10 +95,21 @@ export function PageMotion() {
       if (href.startsWith("tel:")) track("Click to call");
       if (href.startsWith("mailto:")) track("Click to email");
 
-      /* Smooth-scroll only links that stay on this exact page. A CTA like
-         /?tier=signature#founding-list has to navigate for real — the query
-         is what carries the tier, and intercepting it would strand that in
-         the fragment where location.search never sees it. */
+      /* Smooth-scroll links that stay on this page, including a pricing card
+         whose href is /?tier=signature#founding-list. The query has to stay
+         in location.search — pushing only the hash would drop it — and the
+         form listens for banyan:tier so the select updates without a reload.
+         A plain navigation still works with JavaScript off. */
+      if (
+        event.metaKey ||
+        event.ctrlKey ||
+        event.shiftKey ||
+        event.altKey ||
+        event.button !== 0
+      ) {
+        return;
+      }
+
       let url: URL;
       try {
         url = new URL(link.href, window.location.href);
@@ -109,7 +120,6 @@ export function PageMotion() {
       if (
         url.origin !== window.location.origin ||
         url.pathname !== window.location.pathname ||
-        url.search !== window.location.search ||
         url.hash.length < 2
       ) {
         return;
@@ -117,9 +127,15 @@ export function PageMotion() {
 
       const target = document.getElementById(url.hash.slice(1));
       if (!target) return;
+      const tag = target.tagName;
+      if (tag === "INPUT" || tag === "SELECT" || tag === "TEXTAREA") return;
+
+      const hrefAttr = link.getAttribute("href") ?? "";
+      const search = hrefAttr.includes("?") ? url.search : window.location.search;
 
       event.preventDefault();
-      history.pushState(null, "", url.hash);
+      history.pushState(null, "", `${url.pathname}${search}${url.hash}`);
+      if (hrefAttr.includes("tier=")) window.dispatchEvent(new Event("banyan:tier"));
       scrollToElement(target);
       markArrived(target);
     }

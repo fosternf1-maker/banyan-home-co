@@ -8,7 +8,6 @@ export const neighborhoods = [
   "Palma Ceia",
   "Beach Park",
   "Davis Islands",
-  "Harbour Island",
   "Bayshore",
   "Sunset Park",
   "Culbreath Isles",
@@ -99,6 +98,32 @@ export const tiers = [
 
 export type TierId = (typeof tiers)[number]["id"];
 
+/** Optional founding-list answer. Query values match `tiers[].id`, plus an
+ *  explicit "not sure" so a preselected card and a blank visit are distinct. */
+export const tierInterestOptions = [
+  { value: tiers[0].id, label: tiers[0].name },
+  { value: tiers[1].id, label: tiers[1].name },
+  { value: tiers[2].id, label: tiers[2].name },
+  { value: "not-sure", label: "Not sure" },
+] as const;
+
+export type TierInterest = (typeof tierInterestOptions)[number]["value"];
+
+export function tierFromParam(
+  value: string | string[] | undefined | null,
+): TierInterest {
+  const raw = Array.isArray(value) ? value[0] : value;
+  if (
+    raw === "essentials" ||
+    raw === "signature" ||
+    raw === "platinum" ||
+    raw === "not-sure"
+  ) {
+    return raw;
+  }
+  return "not-sure";
+}
+
 export const membershipRows: {
   feature: string;
   note?: string;
@@ -162,11 +187,11 @@ export const membershipRows: {
     },
   },
   {
-    feature: "Hurricane readiness programme",
+    feature: "Hurricane readiness program",
     values: {
       essentials: "—",
       signature: "Post-storm inspection",
-      platinum: "Full programme",
+      platinum: "Full program",
     },
   },
   {
@@ -207,7 +232,7 @@ export const coastItems = [
 ] as const;
 
 export const vettingItems = [
-  "Florida state licence, verified through DBPR — with a planned quarterly re-check once trades are on the roster",
+  "Florida state license, verified through DBPR — with a planned quarterly re-check once trades are on the roster",
   "General liability and workers' compensation on file, with Banyan named as additional insured, once the entity exists",
   "Background check on every individual who enters a member's home",
   "Three verified references from completed residential work",
@@ -254,14 +279,14 @@ export const faqs = [
   {
     q: "Can I cancel?",
     a: [
-      "Planned, once membership is actually for sale: monthly memberships month to month, 30 days' notice, no early-termination fee. Annual memberships cancelled mid-term would be refunded unused months less the two-month prepay discount.",
+      "Planned, once membership is actually for sale: monthly memberships month to month, 30 days' notice, no early-termination fee. Annual memberships canceled mid-term would be refunded unused months less the two-month prepay discount.",
       "Those are not terms in force today. There is no membership agreement yet, and visiting this site or contacting us does not create one.",
     ],
   },
   {
     q: "Where in Tampa do you work?",
     a: [
-      "Year 1 public area is South Tampa only: 33606, 33609, 33611, and 33629, including Beach Park and Davis Islands — Hyde Park, Palma Ceia, Harbour Island, Bayshore, Sunset Park, and Culbreath Isles. We stay inside that radius on purpose. Membership opens mid-January 2027.",
+      "Year 1 public area is South Tampa only: 33606, 33609, 33611, and 33629, including Beach Park and Davis Islands — Hyde Park, Palma Ceia, Bayshore, Sunset Park, and Culbreath Isles. We stay inside that radius on purpose. Membership opens mid-January 2027.",
     ],
   },
   {
@@ -311,7 +336,7 @@ export const auditSystems = [
   },
   {
     system: "Electrical panel",
-    detail: "200A, 2018. Labelled, no double-taps, AFCI on bedroom circuits.",
+    detail: "200A, 2018. Labeled, no double-taps, AFCI on bedroom circuits.",
     status: "Good" as const,
     due: "\u2014",
   },

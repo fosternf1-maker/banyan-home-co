@@ -1,5 +1,5 @@
 /**
- * A drawn map of the year-one radius, in brand colours. Schematic on purpose —
+ * A drawn map of the year-one radius, in brand colors. Schematic on purpose —
  * it orients rather than locates, which is why it says so on its face. Static
  * SVG: no embed, no third-party script, no light-theme iframe to fight.
  */
@@ -10,7 +10,6 @@ const hoods = [
   { id: "culbreath", name: "Culbreath Isles", zip: "33609", points: "122,268 190,264 196,352 130,352" },
   { id: "sunset", name: "Sunset Park", zip: "33629", points: "204,272 264,272 262,372 208,368" },
   { id: "bayshore", name: "Bayshore", zip: "33611", points: "396,178 448,184 424,436 384,424" },
-  { id: "harbour", name: "Harbour Island", zip: "33602", points: "508,96 566,102 570,152 512,150" },
 ];
 
 export function AreaMap() {
@@ -19,10 +18,10 @@ export function AreaMap() {
       <svg viewBox="0 0 620 780" role="img" aria-labelledby="areamap-title areamap-desc">
         <title id="areamap-title">Banyan Home Co. year-one service area</title>
         <desc id="areamap-desc">
-          A schematic map of the South Tampa peninsula showing the eight
-          neighbourhoods served in year one: Hyde Park, Palma Ceia, Beach Park,
-          Davis Islands, Harbour Island, Bayshore, Sunset Park and Culbreath
-          Isles, across ZIP codes 33606, 33609, 33611 and 33629.
+          A schematic map of the South Tampa peninsula showing the seven
+          neighborhoods served in year one: Hyde Park, Palma Ceia, Beach Park,
+          Davis Islands, Bayshore, Sunset Park and Culbreath Isles, across ZIP
+          codes 33606, 33609, 33611 and 33629.
         </desc>
         <polygon
           className="areamap__land"

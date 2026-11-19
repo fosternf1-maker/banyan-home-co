@@ -14,13 +14,20 @@ import { SiteFooter } from "@/components/site-footer";
 import { StandardAndArea } from "@/components/standard-and-area";
 import { WhyExists } from "@/components/why-exists";
 import { faqPageJsonLd } from "@/lib/schema";
+import { tierFromParam } from "@/lib/site";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/" },
   openGraph: { url: "/" },
 };
 
-export default function Home() {
+export default async function Home({
+  searchParams,
+}: {
+  searchParams: Promise<{ tier?: string | string[] }>;
+}) {
+  const tier = tierFromParam((await searchParams).tier);
+
   return (
     <>
       <JsonLdScript data={faqPageJsonLd()} />
@@ -29,7 +36,7 @@ export default function Home() {
         <WhyExists />
         <HowItWorks />
         <SampleAudit />
-        <FoundingListSection />
+        <FoundingListSection initialTier={tier} />
         <Founder />
         <PromiseBand />
         <StandardAndArea />

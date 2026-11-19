@@ -21,13 +21,13 @@ export default function PrivacyPage() {
 
       <h2>What we collect</h2>
       <p>
-        The founding list asks for your name, email, mobile number and ZIP code,
-        and optionally your neighbourhood, home type, who we should contact, and
-        a short note. If you arrived from a pricing card, we also record which
-        tier prompted the enquiry.
+        The founding list asks for your name, email and ZIP code, and optionally
+        your mobile number, neighborhood, home type, who we should contact, the
+        tier you are interested in and a short note. If you arrived from a
+        pricing card, we also record which tier prompted the inquiry.
       </p>
       <p>
-        The trade form asks for your company name, Florida licence number,
+        The trade form asks for your company name, Florida license number,
         trades, years in residential work, service ZIPs, whether general
         liability and workers&apos; compensation are in force, and a contact
         name, email and phone.

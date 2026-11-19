@@ -42,7 +42,7 @@ export function Founder() {
             It is also why the map is so small. Four ZIP codes is not modesty —
             it is the largest area where I can answer the phone myself and know
             the roof we are talking about. We would rather be excellent across a
-            few neighbourhoods than adequate across a metro.
+            few neighborhoods than adequate across a metro.
           </p>
           <p>
             Membership does not open until mid-January 2027. Until then, nothing

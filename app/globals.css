@@ -42,7 +42,12 @@
 }
 
 html {
+  overflow-x: clip;
   scroll-padding-top: calc(var(--nav) + 0.75rem);
+}
+
+main {
+  overflow-x: clip;
 }
 
 html:not(.motion-ready) {
@@ -52,6 +57,7 @@ html:not(.motion-ready) {
 body {
   margin: 0;
   min-height: 100%;
+  overflow-x: clip;
   background: var(--color-paper);
   color: var(--color-ink);
   font-family: var(--font-sans);
@@ -775,7 +781,26 @@ a {
 
 .tiers-desktop {
   display: none;
+  max-width: 100%;
+  min-width: 0;
   overflow-x: auto;
+  overflow-y: hidden;
+  overscroll-behavior-x: contain;
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-canopy) transparent;
+  background:
+    linear-gradient(to right, var(--color-paper) 30%, transparent),
+    linear-gradient(to left, var(--color-paper) 30%, transparent) 100% 0,
+    radial-gradient(farthest-side at 0 50%, rgb(20 33 28 / 0.16), transparent),
+    radial-gradient(farthest-side at 100% 50%, rgb(20 33 28 / 0.16), transparent)
+      100% 0;
+  background-repeat: no-repeat;
+  background-size:
+    2.5rem 100%,
+    2.5rem 100%,
+    0.8rem 100%,
+    0.8rem 100%;
+  background-attachment: local, local, scroll, scroll;
 }
 
 .tiers {
@@ -796,6 +821,18 @@ a {
 .tiers thead th {
   border-bottom: 1px solid var(--color-ink);
   padding-bottom: 1.5rem;
+}
+
+.tiers thead th.col-feature,
+.tiers tbody th {
+  position: sticky;
+  left: 0;
+  z-index: 1;
+  background: var(--color-paper);
+}
+
+.tiers thead th.col-feature {
+  z-index: 2;
 }
 
 .tiers tbody th {
@@ -896,16 +933,17 @@ td.featured {
 }
 
 .tier-card dl > div {
-  display: flex;
-  justify-content: space-between;
-  gap: 1.25rem;
-  padding-block: 0.9rem;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 0.2rem;
+  padding-block: 0.85rem;
   border-bottom: 1px solid var(--color-line-soft);
 }
 
 .tier-card dt {
   color: var(--color-ink-2);
   font-size: 0.92rem;
+  min-width: 0;
 }
 
 .tier-card dt em {
@@ -915,9 +953,25 @@ td.featured {
 
 .tier-card dd {
   margin: 0;
-  text-align: right;
+  min-width: 0;
+  text-align: left;
+  font-weight: 600;
   font-variant-numeric: tabular-nums;
-  white-space: nowrap;
+  overflow-wrap: anywhere;
+}
+
+@media (min-width: 480px) {
+  .tier-card dl > div {
+    grid-template-columns: minmax(0, 1.35fr) minmax(0, 0.85fr);
+    align-items: baseline;
+    gap: 0.75rem 1rem;
+  }
+
+  .tier-card dd {
+    text-align: right;
+    font-weight: 500;
+    overflow-wrap: normal;
+  }
 }
 
 @media (min-width: 840px) {
@@ -933,6 +987,10 @@ td.featured {
 .two-col {
   display: grid;
   gap: clamp(2.75rem, 6vw, 5rem);
+}
+
+.two-col > * {
+  min-width: 0;
 }
 
 @media (min-width: 900px) {
@@ -952,9 +1010,13 @@ td.featured {
   display: flex;
   justify-content: space-between;
   align-items: baseline;
-  gap: 2rem;
+  gap: 1rem;
   padding-block: 0.98rem;
   border-bottom: 1px solid var(--color-line-soft);
+}
+
+.services li > span:first-child {
+  min-width: 0;
 }
 
 .services li span:last-child {
@@ -1374,7 +1436,8 @@ td.featured {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  html {
+  html,
+  html:not(.motion-ready) {
     scroll-behavior: auto;
   }
 
@@ -1420,7 +1483,7 @@ td.featured {
    Fields inherit the page's own vocabulary rather than a form
    library's: same rules, same measure, same uppercase labels as
    the section eyebrows. Light ground is the base; the dark band
-   overrides only the colours it has to.
+   overrides only the colors it has to.
    ============================================================ */
 
 .band--dark {
@@ -1494,12 +1557,13 @@ td.featured {
 .field select,
 .field textarea {
   width: 100%;
-  min-height: 3rem;
+  min-height: 2.75rem;
   padding: 0.72rem 0.9rem;
   font-family: var(--font-sans);
   font-size: var(--step-0);
   line-height: 1.5;
   color: var(--color-ink);
+  scroll-margin-top: calc(var(--nav) + 1rem);
   background: var(--color-surface);
   border: 1px solid var(--color-line);
   border-radius: 0;
@@ -1552,6 +1616,11 @@ td.featured {
   outline: none;
 }
 
+.form__summary--error:focus {
+  outline: 2px solid #8c2f22;
+  outline-offset: 4px;
+}
+
 .form__summary-text {
   margin: 0;
   padding: 0.85rem 1.05rem;
@@ -1559,6 +1628,70 @@ td.featured {
   color: #8c2f22;
   background: color-mix(in srgb, #8c2f22 10%, transparent);
   border-left: 3px solid #8c2f22;
+}
+
+.form__summary-text p {
+  margin: 0;
+  max-width: none;
+  color: inherit;
+  font-weight: 600;
+}
+
+.form__summary-list {
+  margin: 0.35rem 0 0;
+  padding: 0;
+  list-style: none;
+  font-weight: 500;
+}
+
+.form__summary-list a {
+  display: flex;
+  align-items: center;
+  min-height: 2.75rem;
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 0.18em;
+}
+
+.form__more {
+  border-top: 1px solid var(--color-line);
+}
+
+.form__more > summary {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  min-height: 2.75rem;
+  padding: 0.35rem 0;
+  cursor: pointer;
+  list-style: none;
+  font-size: var(--step--1);
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-ink-3);
+}
+
+.form__more > summary::-webkit-details-marker {
+  display: none;
+}
+
+.form__more > summary::before {
+  content: "";
+  width: 0.45rem;
+  height: 0.45rem;
+  border-right: 1.5px solid currentColor;
+  border-bottom: 1.5px solid currentColor;
+  transform: translateY(-0.1rem) rotate(45deg);
+  flex-shrink: 0;
+}
+
+.form__more[open] > summary::before {
+  transform: translateY(0.12rem) rotate(225deg);
+}
+
+.form__more .form__grid {
+  padding-bottom: 0.35rem;
 }
 
 .form__foot {
@@ -1628,9 +1761,21 @@ td.featured {
   color: #f0a89a;
 }
 
+.band--dark .form__summary--error:focus {
+  outline-color: #f0a89a;
+}
+
 .band--dark .form__summary-text {
   background: rgba(240, 168, 154, 0.1);
   border-left-color: #f0a89a;
+}
+
+.band--dark .form__more {
+  border-top-color: #2a3f36;
+}
+
+.band--dark .form__more > summary {
+  color: var(--color-on-dark-2);
 }
 
 .band--dark .field--invalid input,
@@ -1770,9 +1915,12 @@ td.featured {
 /* --- per-tier route into the founding list --- */
 
 .tier-ask {
-  display: inline-block;
-  margin-top: 0.9rem;
-  padding-bottom: 2px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.75rem;
+  margin-top: 0.35rem;
+  padding: 0.35rem 0.15rem;
   font-family: var(--font-sans);
   font-size: var(--step--1);
   font-weight: 600;
@@ -1794,7 +1942,9 @@ td.featured {
 }
 
 .tier-card .tier-ask {
-  margin-top: 1.1rem;
+  width: 100%;
+  margin-top: 0.85rem;
+  margin-bottom: 0.85rem;
 }
 
 /* Short desktop screens — a 13" laptop is ~720px of viewport once browser
@@ -1910,6 +2060,8 @@ td.featured {
 
 .audit {
   margin: 0;
+  max-width: 100%;
+  min-width: 0;
   background: var(--color-surface);
   border: 1px solid var(--color-line);
   box-shadow: 0 1px 0 var(--color-line-soft), 0 18px 40px -32px rgb(20 33 28 / 0.5);
@@ -1953,6 +2105,7 @@ td.featured {
   padding: clamp(1.15rem, 2.5vw, 1.75rem);
   display: grid;
   gap: clamp(1.75rem, 3.5vw, 2.75rem);
+  min-width: 0;
 }
 
 .audit__h {
@@ -1966,7 +2119,26 @@ td.featured {
 }
 
 .audit__block {
+  max-width: 100%;
+  min-width: 0;
   overflow-x: auto;
+  overflow-y: hidden;
+  overscroll-behavior-x: contain;
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-canopy) transparent;
+  background:
+    linear-gradient(to right, var(--color-surface) 30%, transparent),
+    linear-gradient(to left, var(--color-surface) 30%, transparent) 100% 0,
+    radial-gradient(farthest-side at 0 50%, rgb(20 33 28 / 0.16), transparent),
+    radial-gradient(farthest-side at 100% 50%, rgb(20 33 28 / 0.16), transparent)
+      100% 0;
+  background-repeat: no-repeat;
+  background-size:
+    2.5rem 100%,
+    2.5rem 100%,
+    0.8rem 100%,
+    0.8rem 100%;
+  background-attachment: local, local, scroll, scroll;
 }
 
 .audit__table {

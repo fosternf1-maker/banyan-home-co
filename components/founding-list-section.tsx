@@ -1,7 +1,12 @@
 import { FoundingList } from "@/components/founding-list";
 import { SectionHeader } from "@/components/section-header";
+import type { TierInterest } from "@/lib/site";
 
-export function FoundingListSection() {
+export function FoundingListSection({
+  initialTier,
+}: {
+  initialTier: TierInterest;
+}) {
   return (
     <section id="founding-list" className="band band--dark rise">
       <div className="wrap founding">
@@ -14,7 +19,7 @@ export function FoundingListSection() {
           />
         </div>
         <div className="founding__form">
-          <FoundingList />
+          <FoundingList initialTier={initialTier} />
         </div>
       </div>
     </section>

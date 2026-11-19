@@ -101,7 +101,7 @@ export function SampleAudit() {
           A specimen, not a report for a real address, and not a licensed home
           inspection. Banyan documents condition and schedules maintenance; it
           does not perform inspections that require a Florida home inspector
-          licence, and it does not pay for repairs. Independent licensed trades
+          license, and it does not pay for repairs. Independent licensed trades
           do the work.
         </p>
       </div>

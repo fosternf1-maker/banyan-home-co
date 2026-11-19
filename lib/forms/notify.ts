@@ -1,4 +1,4 @@
-import { site } from "@/lib/site";
+import { site, tierInterestOptions } from "@/lib/site";
 import type { TradeSubmission, WaitlistSubmission } from "@/lib/forms/schema";
 
 const ENDPOINT = "https://api.resend.com/emails";
@@ -53,7 +53,7 @@ async function post(payload: Record<string, unknown>) {
  * Before a domain is verified, Resend's shared sender will only deliver to the
  * address that owns the Resend account — anything else comes back 403. It
  * names the permitted address in that error, so rather than dropping a real
- * enquiry we retry once to the address Resend just told us it will accept.
+ * inquiry we retry once to the address Resend just told us it will accept.
  *
  * This bridge exists so the founding list works on day one with nothing but an
  * API key. It goes dead the moment RESEND_FROM points at a verified domain,
@@ -79,6 +79,13 @@ async function send(payload: Record<string, unknown>) {
   }
 }
 
+function askedTier(tier: string) {
+  if (!tier) return "—";
+  return (
+    tierInterestOptions.find((option) => option.value === tier)?.label ?? tier
+  );
+}
+
 const areaLine = {
   "year-one": "IN YEAR-ONE AREA",
   expansion: "Outside year one — expansion list",
@@ -91,12 +98,12 @@ export async function notifyWaitlist(entry: WaitlistSubmission) {
     "",
     `Name:          ${entry.name}`,
     `Email:         ${entry.email}`,
-    `Mobile:        ${entry.mobile}`,
+    `Mobile:        ${entry.mobile || "—"}`,
     `ZIP:           ${entry.zip}`,
-    `Neighbourhood: ${entry.neighborhood || "—"}`,
+    `Neighborhood:  ${entry.neighborhood || "—"}`,
     `Home type:     ${entry.homeType || "—"}`,
     `Contact:       ${entry.contactRole || "—"}`,
-    `Tier asked:    ${entry.tier || "—"}`,
+    `Tier asked:    ${askedTier(entry.tier)}`,
     "",
     "Note:",
     entry.note || "—",
@@ -120,7 +127,7 @@ export async function confirmToMember(entry: WaitlistSubmission) {
     entry.area === "year-one"
       ? "You're on the founding list. We open mid-January 2027, and we will write before anyone can buy a membership."
       : entry.area === "expansion"
-        ? "Year one is South Tampa only — 33606, 33609, 33611 and 33629. We have kept your name, and we expand by neighbourhood rather than by advertisement."
+        ? "Year one is South Tampa only — 33606, 33609, 33611 and 33629. We have kept your name, and we expand by neighborhood rather than by advertisement."
         : "We are not the right fit for that address yet, and we would rather say so than keep you waiting on something we cannot deliver.";
 
   await send({
@@ -145,7 +152,7 @@ export async function confirmToMember(entry: WaitlistSubmission) {
 export async function notifyTrade(entry: TradeSubmission) {
   const lines = [
     `Company:        ${entry.company}`,
-    `Licence:        ${entry.license}`,
+    `License:        ${entry.license}`,
     `Trades:         ${entry.trades}`,
     `Years (resi):   ${entry.years || "—"}`,
     `Service ZIPs:   ${entry.zips || "—"}`,

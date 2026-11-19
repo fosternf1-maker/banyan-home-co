@@ -29,7 +29,10 @@ export function rateLimited(key: string) {
 
 /**
  * Two cheap bot checks that cost a real person nothing: a field no human sees,
- * and the fact that nobody fills a nine-field form in under three seconds.
+ * and a form that arrives completely filled in under three seconds. A short
+ * visit — name, email and ZIP, which is all the form requires — can be
+ * autofilled faster than that, so the clock only applies when every field
+ * has something in it.
  */
 export function looksAutomated(data: FormData) {
   const honeypot = data.get("company_website");
@@ -37,7 +40,24 @@ export function looksAutomated(data: FormData) {
 
   const raw = data.get("rendered_at");
   const renderedAt = typeof raw === "string" ? Number(raw) : NaN;
-  if (!Number.isFinite(renderedAt)) return false;
+  if (!Number.isFinite(renderedAt) || renderedAt <= 0) return false;
+
+  const keys = [
+    "name",
+    "email",
+    "mobile",
+    "zip",
+    "neighborhood",
+    "homeType",
+    "contactRole",
+    "note",
+    "tier",
+  ];
+  const complete = keys.every((key) => {
+    const value = data.get(key);
+    return typeof value === "string" && value.trim() !== "";
+  });
+  if (!complete) return false;
 
   return Date.now() - renderedAt < 3000;
 }

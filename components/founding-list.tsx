@@ -1,6 +1,6 @@
 "use client";
 
-import { useActionState, useEffect, useRef } from "react";
+import { useActionState, useEffect, useRef, useState, type ChangeEvent } from "react";
 import { joinFoundingList } from "@/app/actions";
 import { Field } from "@/components/forms/field";
 import { track } from "@/lib/analytics";
@@ -9,8 +9,16 @@ import {
   homeTypes,
   idleState,
   type AreaVerdict,
+  type FieldErrors,
 } from "@/lib/forms/schema";
-import { neighborhoods, site, year1Zips } from "@/lib/site";
+import {
+  neighborhoods,
+  site,
+  tierFromParam,
+  tierInterestOptions,
+  year1Zips,
+  type TierInterest,
+} from "@/lib/site";
 
 const successCopy: Record<AreaVerdict, { title: string; body: string }> = {
   "year-one": {
@@ -19,7 +27,7 @@ const successCopy: Record<AreaVerdict, { title: string; body: string }> = {
   },
   expansion: {
     title: "You're on the expansion list.",
-    body: `Year one is South Tampa only — ${year1Zips.join(", ")}. We'll keep your name if we expand by neighbourhood.`,
+    body: `Year one is South Tampa only — ${year1Zips.join(", ")}. We'll keep your name if we expand by neighborhood.`,
   },
   "out-of-area": {
     title: "We're not the right fit for that address.",
@@ -27,24 +35,95 @@ const successCopy: Record<AreaVerdict, { title: string; body: string }> = {
   },
 };
 
-export function FoundingList() {
+const fieldLabels: Record<string, string> = {
+  name: "Name",
+  email: "Email",
+  zip: "ZIP",
+  mobile: "Mobile",
+  neighborhood: "Neighborhood",
+  homeType: "Home type",
+  contactRole: "Who should we contact",
+  tier: "Interested tier",
+  note: "Anything we should know",
+};
+
+const detailFields = [
+  "mobile",
+  "neighborhood",
+  "homeType",
+  "contactRole",
+  "tier",
+  "note",
+];
+
+function tierFromLocation() {
+  return tierFromParam(new URLSearchParams(window.location.search).get("tier"));
+}
+
+type DraftKey =
+  | "name"
+  | "email"
+  | "zip"
+  | "mobile"
+  | "neighborhood"
+  | "homeType"
+  | "contactRole"
+  | "note";
+
+const emptyDraft: Record<DraftKey, string> = {
+  name: "",
+  email: "",
+  zip: "",
+  mobile: "",
+  neighborhood: "",
+  homeType: "",
+  contactRole: "",
+  note: "",
+};
+
+export function FoundingList({
+  initialTier = "not-sure",
+}: {
+  initialTier?: TierInterest;
+}) {
   const [state, formAction, pending] = useActionState(
     joinFoundingList,
     idleState,
   );
+  const [tier, setTier] = useState<TierInterest>(initialTier);
+  const [detailsOpen, setDetailsOpen] = useState(initialTier !== "not-sure");
+  const [draft, setDraft] = useState(emptyDraft);
+
+  function update(key: DraftKey) {
+    return (
+      event: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>,
+    ) => {
+      const value = event.target.value;
+      setDraft((current) => ({ ...current, [key]: value }));
+    };
+  }
   const summary = useRef<HTMLDivElement>(null);
   const stamp = useRef<HTMLInputElement>(null);
-  const tier = useRef<HTMLInputElement>(null);
 
-  /* Both are write-once values for hidden fields nobody looks at, so they are
-     set on the DOM node directly. Through state, filling two inputs nothing
-     reads would re-render the entire form. */
+  /* Write-once value for a field nobody looks at — set on the node rather
+     than re-rendering the form through state to fill one hidden input. */
   useEffect(() => {
     if (stamp.current) stamp.current.value = String(Date.now());
-    // Pricing cards deep-link as /?tier=signature#founding-list — query before
-    // hash, or the tier lands in the fragment where search never sees it.
-    const asked = new URLSearchParams(window.location.search).get("tier");
-    if (asked && tier.current) tier.current.value = asked;
+  }, []);
+
+  useEffect(() => {
+    function syncTier() {
+      const next = tierFromLocation();
+      setTier(next);
+      if (next !== "not-sure") setDetailsOpen(true);
+    }
+
+    window.addEventListener("banyan:tier", syncTier);
+    window.addEventListener("popstate", syncTier);
+    return () => {
+      window.removeEventListener("banyan:tier", syncTier);
+      window.removeEventListener("popstate", syncTier);
+    };
   }, []);
 
   useEffect(() => {
@@ -57,7 +136,10 @@ export function FoundingList() {
     }
   }, [state]);
 
-  const errors = state.status === "error" ? state.errors : {};
+  const errors: FieldErrors = state.status === "error" ? state.errors : {};
+  const errorEntries = Object.entries(errors);
+  const detailError = detailFields.some((key) => errors[key]);
+  const detailsVisible = detailsOpen || detailError;
 
   if (state.status === "sent") {
     const copy = successCopy[state.area];
@@ -93,33 +175,64 @@ export function FoundingList() {
   return (
     <form className="form" action={formAction} noValidate>
       <div
-        className="form__summary"
+        className={`form__summary${state.status === "error" ? " form__summary--error" : ""}`}
         ref={summary}
         tabIndex={-1}
         role={state.status === "error" ? "alert" : undefined}
       >
         {state.status === "error" && state.message ? (
-          <p className="form__summary-text">{state.message}</p>
+          <div className="form__summary-text">
+            <p>{state.message}</p>
+            {errorEntries.length > 0 ? (
+              <ul className="form__summary-list">
+                {errorEntries.map(([key, message]) => (
+                  <li key={key}>
+                    <a
+                      href={`#f-${key}`}
+                      onClick={(event) => {
+                        const field = document.getElementById(
+                          event.currentTarget.hash.slice(1),
+                        );
+                        if (field?.closest("details")) setDetailsOpen(true);
+                      }}
+                    >
+                      {(fieldLabels[key] ?? key) + ": " + message}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            ) : null}
+          </div>
         ) : null}
       </div>
 
       <div className="form__grid">
         <Field name="name" label="Name" error={errors.name} required>
-          {(a) => <input {...a} type="text" autoComplete="name" />}
+          {(a) => (
+            <input
+              {...a}
+              type="text"
+              autoComplete="name"
+              autoCapitalize="words"
+              value={draft.name}
+              onChange={update("name")}
+            />
+          )}
         </Field>
 
         <Field name="email" label="Email" error={errors.email} required>
-          {(a) => <input {...a} type="email" autoComplete="email" />}
-        </Field>
-
-        <Field
-          name="mobile"
-          label="Mobile"
-          error={errors.mobile}
-          hint="So we can text you when membership opens."
-          required
-        >
-          {(a) => <input {...a} type="tel" autoComplete="tel" />}
+          {(a) => (
+            <input
+              {...a}
+              type="email"
+              inputMode="email"
+              autoComplete="email"
+              autoCapitalize="none"
+              spellCheck={false}
+              value={draft.email}
+              onChange={update("email")}
+            />
+          )}
         </Field>
 
         <Field name="zip" label="ZIP" error={errors.zip} required>
@@ -128,66 +241,150 @@ export function FoundingList() {
               {...a}
               type="text"
               inputMode="numeric"
-              maxLength={5}
               autoComplete="postal-code"
+              maxLength={5}
+              pattern="[0-9]*"
+              spellCheck={false}
+              value={draft.zip}
+              onChange={update("zip")}
             />
           )}
         </Field>
+      </div>
 
-        <Field name="neighborhood" label="Neighbourhood" error={errors.neighborhood}>
-          {(a) => (
-            <select {...a} defaultValue="">
-              <option value="">Select one</option>
-              {neighborhoods.map((hood) => (
-                <option key={hood} value={hood}>
-                  {hood}
-                </option>
-              ))}
-              <option value="Other">Other</option>
-            </select>
-          )}
-        </Field>
+      <details
+        className="form__more"
+        open={detailsVisible}
+        onToggle={(event) => {
+          setDetailsOpen(event.currentTarget.open);
+        }}
+      >
+        <summary>Add details (optional)</summary>
+        <div className="form__grid">
+          <Field
+            name="mobile"
+            label="Mobile"
+            error={errors.mobile}
+            hint="So we can text you when membership opens."
+          >
+            {(a) => (
+              <input
+                {...a}
+                type="tel"
+                inputMode="tel"
+                autoComplete="tel"
+                value={draft.mobile}
+                onChange={update("mobile")}
+              />
+            )}
+          </Field>
 
-        <Field name="homeType" label="Home type" error={errors.homeType}>
-          {(a) => (
-            <select {...a} defaultValue="">
+          <Field
+            name="neighborhood"
+            label="Neighborhood"
+            error={errors.neighborhood}
+          >
+            {(a) => (
+              <select
+                {...a}
+                autoComplete="off"
+                value={draft.neighborhood}
+                onChange={update("neighborhood")}
+              >
+                <option value="">Select one</option>
+                {neighborhoods.map((hood) => (
+                  <option key={hood} value={hood}>
+                    {hood}
+                  </option>
+                ))}
+                <option value="Other">Other</option>
+              </select>
+            )}
+          </Field>
+
+          <Field name="homeType" label="Home type" error={errors.homeType}>
+            {(a) => (
+            <select
+              {...a}
+              autoComplete="off"
+              value={draft.homeType}
+              onChange={update("homeType")}
+            >
               <option value="">Select one</option>
               {homeTypes.map((type) => (
-                <option key={type} value={type}>
-                  {type}
-                </option>
-              ))}
-            </select>
-          )}
-        </Field>
+                  <option key={type} value={type}>
+                    {type}
+                  </option>
+                ))}
+              </select>
+            )}
+          </Field>
 
-        <Field
-          name="contactRole"
-          label="Who should we contact"
-          error={errors.contactRole}
-        >
-          {(a) => (
-            <select {...a} defaultValue="">
+          <Field
+            name="contactRole"
+            label="Who should we contact"
+            error={errors.contactRole}
+          >
+            {(a) => (
+            <select
+              {...a}
+              autoComplete="off"
+              value={draft.contactRole}
+              onChange={update("contactRole")}
+            >
               <option value="">Select one</option>
               {contactRoles.map((role) => (
-                <option key={role} value={role}>
-                  {role}
-                </option>
-              ))}
-            </select>
-          )}
-        </Field>
+                  <option key={role} value={role}>
+                    {role}
+                  </option>
+                ))}
+              </select>
+            )}
+          </Field>
 
-        <Field
-          name="note"
-          label="Anything we should know"
-          wide
-          error={errors.note}
-          hint="300 characters."
-        >
-          {(a) => <textarea {...a} rows={3} maxLength={300} />}
-        </Field>
-      </div>
+          <Field
+            name="tier"
+            label="Interested tier"
+            error={errors.tier}
+            wide
+          >
+            {(a) => (
+              <select
+                {...a}
+                autoComplete="off"
+                value={tier}
+                onChange={(event) =>
+                  setTier(tierFromParam(event.target.value))
+                }
+              >
+                {tierInterestOptions.map((option) => (
+                  <option key={option.value} value={option.value}>
+                    {option.label}
+                  </option>
+                ))}
+              </select>
+            )}
+          </Field>
+
+          <Field
+            name="note"
+            label="Anything we should know"
+            wide
+            error={errors.note}
+            hint="300 characters."
+          >
+            {(a) => (
+              <textarea
+                {...a}
+                rows={3}
+                maxLength={300}
+                value={draft.note}
+                onChange={update("note")}
+              />
+            )}
+          </Field>
+        </div>
+      </details>
 
       <p className="field field--trap" aria-hidden="true">
         <label htmlFor="f-company_website">Company website</label>
@@ -200,7 +397,6 @@ export function FoundingList() {
         />
       </p>
       <input type="hidden" name="rendered_at" ref={stamp} defaultValue="" />
-      <input type="hidden" name="tier" ref={tier} defaultValue="" />
 
       <div className="form__foot">
         <button className="btn btn--ink" type="submit" disabled={pending}>

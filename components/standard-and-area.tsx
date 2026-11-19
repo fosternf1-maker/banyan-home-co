@@ -26,7 +26,7 @@ export function StandardAndArea() {
           <p className="prose">
             Year 1 is South Tampa only — 33606, 33609, 33611, and 33629,
             including Beach Park and Davis Islands. A tight radius on purpose.
-            We would rather be excellent across a few neighbourhoods than
+            We would rather be excellent across a few neighborhoods than
             adequate across a metro.
           </p>
           <AreaMap />
@@ -40,7 +40,7 @@ export function StandardAndArea() {
             <a className="link-liquid" href={site.foundingHref}>
               founding list
             </a>{" "}
-            and say so — we expand by neighbourhood, not by advertisement. Or
+            and say so — we expand by neighborhood, not by advertisement. Or
             write{" "}
             <a className="link-liquid" href={site.areaMailto}>
               {site.email}

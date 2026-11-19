@@ -37,7 +37,7 @@ export function TradeForm() {
         <h3>We have it.</h3>
         <p>
           No roster exists yet — no vendors are signed. When it does, we verify
-          the licence through DBPR before anyone is called. We take no
+          the license through DBPR before anyone is called. We take no
           commission on your invoices, then or ever.
         </p>
         <p className="form-done__quiet">
@@ -71,9 +71,9 @@ export function TradeForm() {
 
         <Field
           name="license"
-          label="Florida licence number"
+          label="Florida license number"
           error={errors.license}
-          hint="We verify every licence through DBPR."
+          hint="We verify every license through DBPR."
           required
         >
           {(a) => <input {...a} type="text" />}
